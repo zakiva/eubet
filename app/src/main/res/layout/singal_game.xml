@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.zakiva.euro.WinningTeam">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeSingleGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/buttonFirstTeam"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gameHeader"
+            android:gravity="center|left"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_horizontal"
+            android:background="#d0dddc"
+            android:text="team Name"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/buttonTie"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonFirstTeam"
+            android:gravity="center|left"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_horizontal"
+            android:background="#FFFFFF"
+            android:text="tie"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/buttonSecondTeam"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/buttonTie"
+            android:background="#d0dddc"
+            android:gravity="center|left"
+            android:text="team Name"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Firday 10 June, 22:00"
+            android:id="@+id/gameHeader"
+            />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

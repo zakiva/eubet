@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.zakiva.euro.WinningTeam">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeWinningTeamBar"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#d0dddc"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/buttonTeamName"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|left"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_horizontal"
+            android:background="#d0dddc"
+            android:text="team Name"
+            android:textSize="16dp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
