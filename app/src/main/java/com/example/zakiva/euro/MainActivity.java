@@ -1,34 +1,113 @@
 package com.example.zakiva.euro;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String userName;
+    //final public String userName = "";
+    private Firebase firebase;
+    int isUserExist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userName = "zahi";
+        //userName = "zahi";
+        Firebase.setAndroidContext(this);
+        firebase = new Firebase("https://eurofirebase.firebaseio.com/");
 
+        isUserExist = 0;
+        String curUsername = getFromLocalDatabase("username");
+        if (!curUsername.equals("NULL")){
+            ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
+            ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
+            isUserExist = 1;
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        isUserExist = 0;
+        String curUsername = getFromLocalDatabase("username");
+        if (!curUsername.equals("NULL")){
+            ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
+            ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
+            isUserExist = 1;
+        }
+    }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        isUserExist = 0;
+        String curUsername = getFromLocalDatabase("username");
+        if (!curUsername.equals("NULL")){
+            ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
+            ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
+            isUserExist = 1;
+        }
+    }
+
+    public String getFromLocalDatabase(String key){
+        SharedPreferences sharedPref = getSharedPreferences("FILE1", 0);
+        //int defaultValue = getResources().getInteger(R.string.saved_high_score_default);
+        return sharedPref.getString(key, "NULL");
+    }
+
+    public void storeInLocalDatabae(String key, String value ){
+        SharedPreferences sharedPref = getSharedPreferences("FILE1", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.commit();
     }
 
     public void buttonStartBetClicked(View view) {
-        Intent bets = new Intent(MainActivity.this, Bets.class);
-        startActivity(bets);
+        if (isUserExist == 1){
+            Intent bets = new Intent(MainActivity.this, Bets.class);
+            startActivity(bets);
+            return;
+        }
+        final String userName = ((EditText) findViewById(R.id.editText)).getText().toString();
+        if (userName.equals("")){
+            Toast.makeText(getApplicationContext(),"Pleae enter your user name",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            firebase.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if (snapshot.child(userName).exists()){
+                        Toast.makeText(getApplicationContext(),"User name already taken. Please choose another",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        storeInLocalDatabae("username", userName);
+                        firebase.child("Users").child(userName).setValue(true);
+                        Intent bets = new Intent(MainActivity.this, Bets.class);
+                        startActivity(bets);
+                    }
+                }
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                }
+            });
+        }
     }
 
     public void buttonCreateGamesClicked (View view) {
 
-        Firebase.setAndroidContext(this);
-        Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        //Firebase.setAndroidContext(this);
+        //Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
 
         Game game1 = new Game(1, "Macabi", 2, "Hapoal", 5, 8, "May 30, 21:00");
         Game game2 = new Game(2, "Ramama", 1, "TLV", 3, 3, "May 20, 13:00");
