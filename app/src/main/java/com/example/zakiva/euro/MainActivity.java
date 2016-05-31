@@ -126,4 +126,9 @@ public class MainActivity extends AppCompatActivity {
         firebase.child("games").push().setValue(game4);
     }
 
+    public void buttonBetGroupsClicked (View view) {
+        Intent ug = new Intent(MainActivity.this, UsersGroups.class);
+        startActivity(ug);
+    }
+
 }
