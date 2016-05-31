@@ -16,94 +16,57 @@ import java.util.Map;
 
 public class GamesList extends AppCompatActivity {
 
+    Firebase firebase;
+    public String userName = "TTTTTTTTTTTTT";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games_list);
 
         Firebase.setAndroidContext(this);
-        Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        firebase = new Firebase("https://eurofirebase.firebaseio.com/");
 
-        firebase.child("games").addValueEventListener(new ValueEventListener() {
+        firebase.child("games").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                System.out.println("###############################");
-                System.out.println(snapshot.getValue());
-                System.out.println(snapshot.getValue().getClass());
-                System.out.println(snapshot.getValue());
-
-
-                draw_games( (Map) snapshot.getValue());
-
+                draw_games((Map) snapshot.getValue());
             }
 
-            @Override public void onCancelled(FirebaseError error) { }
-
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
         });
-
-
-
-
-
-      //  String[] first_teams = {"England 1", "Germeny 3", "Russia 2", "Italy 2", "Italy 1", "Russia 2", "Turkey 4"};
-       // String[] second_teams = {"Germany 2", "Israel 3", "Spain 7", "Israel 1", "Germeny 2", "Holland 5", "France 2"};
-      //  String[] ties = {"3", "6", "9", "6", "9", "2", "7"};
-
-
-
     }
 
-    public void draw_games (Map mp) {
-
-        Firebase.setAndroidContext(this);
-        Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
-
-        String userName = "zahi";
-
-        ArrayList<String[]> items = new ArrayList<String[]>();
-        String[] item;
+    public void draw_games(Map<String, Object> map) {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>draw_games<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 
-        Iterator it = mp.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-            System.out.println(">>" + pair.getValue().getClass() + "<<");
-            System.out.println(">>" + ((Map) pair.getValue()).get("team1") + "<<");
+        final ArrayList<String[]> items = new ArrayList<String[]>();
 
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Map game = (Map) entry.getValue();
+            Map<String, Long> bets = (Map<String, Long>) game.get("bets");
 
-            item = new String[5];
-            item[0] = " " + ((Map) pair.getValue()).get("team1") + " " + Long.toString((long)((Map) pair.getValue()).get("score1"));
-            item[1] = " " + ((Map) pair.getValue()).get("team2") + " " + Long.toString((long)((Map) pair.getValue()).get("score2"));
-            item[2] = " Tie " + ((Map) pair.getValue()).get("scoreX");
-            item[3] = (String) ((Map) pair.getValue()).get("time");
+            final String[] item = new String[6];
+            item[0] = " " + game.get("team1") + " " + Long.toString((long) game.get("score1"));
+            item[1] = " " + game.get("team2") + " " + Long.toString((long) game.get("score2"));
+            item[2] = " Tie " + game.get("scoreX");
+            item[3] = (String) game.get("time");
+            //item[4] = bets.get(((Euro) this.getApplication()).getGlobalUsername()) == null ? Integer.toString(-1) : Long.toString((long) bets.get(((Euro) this.getApplication()).getGlobalUsername()));
+            item[4] = bets.get(userName) == null ? Integer.toString(-1) : Long.toString((long) bets.get(userName));
+            item[5] = key;
 
-            Map <String, Long> bets = (Map <String, Long>) ((Map) pair.getValue()).get("bets");
-            long betOfThisUser;
-
-            if (bets.get(userName) == null){
-                bets.put(userName, (long) -1);
-                firebase.child("games").child((String) pair.getKey()).child("bets").setValue(bets);
-                betOfThisUser = -1;
-
-            }
-            else{
-                betOfThisUser = bets.get(userName);
-
-            }
-            item[4] = Long.toString(betOfThisUser);
             items.add(item);
-
-            it.remove();
         }
-
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>end for<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 
         ListAdapter listAdapter = new GamesListAdapter(getBaseContext(), items);
         ListView listView = (ListView) findViewById(R.id.gamesList);
         listView.setAdapter(listAdapter);
-
-
     }
 }

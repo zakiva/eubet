@@ -13,32 +13,47 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zakiva on 5/26/16.
  */
 public class GamesListAdapter extends ArrayAdapter<String[]> {
 
-   // private List<Game> myGames;
-
+    private Context mContext;
+    public String userName = "TTTTTTTTTTTTT";
 
     public GamesListAdapter(Context context, ArrayList<String[]> items) {
         super(context, R.layout.singal_game, items);
+        this.mContext = context;
     }
 
 
     @Override
-    public View getView(final int i, View view, final ViewGroup viewGroup) {
-        LayoutInflater myInflater = LayoutInflater.from(getContext());
-        View customView = myInflater.inflate(R.layout.singal_game, viewGroup, false);
+    public View getView(final int i, View customView, final ViewGroup viewGroup) {
 
-        RelativeLayout relativeLayout = (RelativeLayout) customView.findViewById(R.id.relativeSingleGame);
+        System.out.println("get view start i =" + i);
+
+        LayoutInflater myInflater = LayoutInflater.from(getContext());
+
+        if (customView == null) {
+            customView = myInflater.inflate(R.layout.singal_game, viewGroup, false);
+        }
+
         Button team1 = (Button) customView.findViewById(R.id.buttonFirstTeam);
         Button team2 = (Button) customView.findViewById(R.id.buttonSecondTeam);
         Button tie = (Button) customView.findViewById(R.id.buttonTie);
         TextView header = (TextView) customView.findViewById(R.id.gameHeader);
+
+        System.out.println("settext");
 
         final String[] item = getItem(i);
         team1.setText(item[0]);
@@ -48,37 +63,94 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
 
        int bet = Integer.parseInt(item[4]);
 
-        if (bet >= 0) {
-            colorList(i, viewGroup, bet);
-        }
+        System.out.println("colorlistfirst");
 
+        // colorList(i, viewGroup, bet);
+
+        System.out.println("setlisteners");
 
         team1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                colorList(i, viewGroup, 0);
+                writeBet(i, item[5], 0);
+                //colorList(i, viewGroup, 0);
             }
         });
 
         team2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                colorList(i, viewGroup, 1);
+                writeBet(i,item[5], 1);
+                //colorList(i, viewGroup, 1);
             }
         });
 
         tie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                colorList(i, viewGroup, 2);
+                writeBet(i, item[5], 2);
+                //colorList(i, viewGroup, 2);
             }
         });
+
+        System.out.println("onClickListenersdone");
+
+
+        final Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+
+        //better to change for listener only to the username. but require to initilize username for all games bets asap
+
+        firebase.child("games").child(item[5]).child("bets").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                System.out.println("on data changed >>BETS<<");
+
+                Map<String, Long> bets = (Map<String, Long>) snapshot.getValue();
+
+                if (bets.get(userName) != null) { // change this too after changing this listener
+                    colorList(i, viewGroup, bets.get(userName));
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+
+        });
+
+        System.out.println("returning customView");
+
+
 
         return customView;
     }
 
-    public void colorList(int i, ViewGroup listView, int button) {
+
+
+
+    public void writeBet (int i, String key, long bet) {
+
+        System.out.println("writing bet...");
+
+
+        final Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+
+
+      //  firebase.child("games").child(key).child("bets").child(((Euro) mContext.getApplicationContext()).getGlobalUsername()).setValue(bet);
+        firebase.child("games").child(key).child("bets").child(userName).setValue(bet);
+
+
+        System.out.println("write ended");
+    }
+
+    public void colorList(int i, ViewGroup listView, long button) {
+
+        System.out.println("color list");
+
         View v;
 
-
         v = getViewByPosition(i, (ListView) listView);
+
+        System.out.println("we have the view !!!!!!!!!!!!!!!!!!!!!!!!!! ");
 
         Button team1 = (Button) v.findViewById(R.id.buttonFirstTeam);
         Button team2 = (Button) v.findViewById(R.id.buttonSecondTeam);
@@ -94,7 +166,7 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         else if (button == 1) {
             team2.setBackgroundColor(Color.parseColor("#FFFFFF02"));
         }
-        else {
+        else if (button == 2) {
             tie.setBackgroundColor(Color.parseColor("#FFFFFF02"));
         }
     }

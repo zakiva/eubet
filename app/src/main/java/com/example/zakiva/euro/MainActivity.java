@@ -16,7 +16,6 @@ import com.firebase.client.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    //final public String userName = "";
     private Firebase firebase;
     int isUserExist;
 
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //userName = "zahi";
+        //((Euro) this.getApplication()).setGlobalUsername("global user name");
         Firebase.setAndroidContext(this);
         firebase = new Firebase("https://eurofirebase.firebaseio.com/");
 
