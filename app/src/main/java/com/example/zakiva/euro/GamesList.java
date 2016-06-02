@@ -60,15 +60,20 @@ public class GamesList extends AppCompatActivity {
             Map game = (Map) entry.getValue();
             Map<String, Long> bets = (Map<String, Long>) game.get("bets");
 
-            final String[] item = new String[11];
-            item[0] = " " + game.get("team1") + " " + Long.toString((long) game.get("score1"));
-            item[1] = " " + game.get("team2") + " " + Long.toString((long) game.get("score2"));
+            final String[] item = new String[12];
+            item[0] = (String) game.get("team1");
+            item[1] = (String) game.get("team2");
             item[2] = " Tie " + game.get("scoreX");
             item[3] = (String) game.get("time");
             //item[4] = bets.get(((Euro) this.getApplication()).getGlobalUsername()) == null ? Integer.toString(-1) : Long.toString((long) bets.get(((Euro) this.getApplication()).getGlobalUsername()));
             item[4] = bets.get(userName) == null ? Integer.toString(-1) : Long.toString((long) bets.get(userName));
             item[5] = key;
+            item[6] = (String) game.get("description");
+            item[7] = Long.toString((long) game.get("result"));
+            item[8] = Long.toString((long) game.get("score1"));
+            item[9] = Long.toString((long) game.get("score2"));
             item[10] = Long.toString((long) game.get("id"));
+            item[11] = Long.toString((long) game.get("result"));
 
             items.add(item);
         }

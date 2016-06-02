@@ -10,10 +10,10 @@
         android:id="@+id/relativeSingleGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#fbf5f6bb"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="#FFFFFF"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="45dp"
         android:orientation="vertical">
 
 
@@ -21,7 +21,8 @@
             android:id="@+id/buttonFirstTeam"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gameHeader"
+            android:layout_below="@+id/teams"
+            android:textAllCaps="false"
             android:gravity="center|left"
             android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttonFirstTeam"
             android:gravity="center|left"
+            android:textAllCaps="false"
             android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
             android:background="#FFFFFF"
@@ -46,6 +48,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:textAllCaps="false"
             android:layout_gravity="center_horizontal"
             android:layout_below="@+id/buttonTie"
             android:background="#d0dddc"
@@ -56,9 +59,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Firday 10 June, 22:00"
+            android:textSize="16dp"
+            android:text="Group A"
             android:id="@+id/gameHeader"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_alignParentRight="true"
+            android:text="June 10, 22:00"
+            android:id="@+id/time"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gameHeader"
+            android:text="England vs France"
+            android:layout_centerHorizontal="true"
+            android:textSize="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/teams"
+            android:textColor="#b2233ff2" />
 
     </RelativeLayout>
 

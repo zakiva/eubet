@@ -17,6 +17,7 @@ public class Game {
     public String team2;
     public int score2;
     public int scoreX;
+    public int edit;
     public String description;
     public int result;
     public String time;
@@ -36,6 +37,7 @@ public class Game {
         this.score2 = score2;
         this.scoreX = scoreX;
         this.time = time;
+        this.edit = 1;
         this.description = description;
         this.result = -1;
         bets = new HashMap <String, Integer>();
