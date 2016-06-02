@@ -17,7 +17,7 @@ import java.util.Map;
 public class GamesList extends AppCompatActivity {
 
     Firebase firebase;
-    public String userName = "TTTTTTTTTTTTT";
+    public String userName = "user3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class GamesList extends AppCompatActivity {
     }
 
     public void draw_games(Map<String, Object> map) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>draw_games<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println(">>>>>>>>>>>>>draw_games<<<<<<<<<<<<<<<");
 
 
         final ArrayList<String[]> items = new ArrayList<String[]>();
@@ -66,8 +66,6 @@ public class GamesList extends AppCompatActivity {
 
             items.add(item);
         }
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>end for<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-
 
         ListAdapter listAdapter = new GamesListAdapter(getBaseContext(), items);
         ListView listView = (ListView) findViewById(R.id.gamesList);

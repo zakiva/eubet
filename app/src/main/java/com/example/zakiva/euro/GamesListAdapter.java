@@ -29,7 +29,7 @@ import java.util.Map;
 public class GamesListAdapter extends ArrayAdapter<String[]> {
 
     private Context mContext;
-    public String userName = "TTTTTTTTTTTTT";
+    public String userName = "user3";
 
     public GamesListAdapter(Context context, ArrayList<String[]> items) {
         super(context, R.layout.singal_game, items);
@@ -48,6 +48,8 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
             customView = myInflater.inflate(R.layout.singal_game, viewGroup, false);
         }
 
+        final View currentView = customView;
+
         Button team1 = (Button) customView.findViewById(R.id.buttonFirstTeam);
         Button team2 = (Button) customView.findViewById(R.id.buttonSecondTeam);
         Button tie = (Button) customView.findViewById(R.id.buttonTie);
@@ -58,35 +60,32 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         final String[] item = getItem(i);
         team1.setText(item[0]);
         team2.setText(item[1]);
-        tie.setText(item[2]);
+        tie.setText(item[5]); // should be item 2
         header.setText(item[3]);
 
-       int bet = Integer.parseInt(item[4]);
+        int bet = Integer.parseInt(item[4]);
 
         System.out.println("colorlistfirst");
 
-        // colorList(i, viewGroup, bet);
+        colorCells(i, viewGroup, bet, currentView);
 
         System.out.println("setlisteners");
 
         team1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 writeBet(i, item[5], 0);
-                //colorList(i, viewGroup, 0);
             }
         });
 
         team2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                writeBet(i,item[5], 1);
-                //colorList(i, viewGroup, 1);
+                writeBet(i, item[5], 1);
             }
         });
 
         tie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 writeBet(i, item[5], 2);
-                //colorList(i, viewGroup, 2);
             }
         });
 
@@ -107,7 +106,9 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
                 Map<String, Long> bets = (Map<String, Long>) snapshot.getValue();
 
                 if (bets.get(userName) != null) { // change this too after changing this listener
-                    colorList(i, viewGroup, bets.get(userName));
+                    colorCells(i, viewGroup, bets.get(userName), currentView);
+                } else {
+                    colorCells(i, viewGroup, -1, currentView);
                 }
             }
 
@@ -120,31 +121,48 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         System.out.println("returning customView");
 
 
-
         return customView;
     }
 
 
-
-
-    public void writeBet (int i, String key, long bet) {
+    public void writeBet(int i, String key, long bet) {
 
         System.out.println("writing bet...");
 
-
         final Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
 
-
-      //  firebase.child("games").child(key).child("bets").child(((Euro) mContext.getApplicationContext()).getGlobalUsername()).setValue(bet);
+        //  firebase.child("games").child(key).child("bets").child(((Euro) mContext.getApplicationContext()).getGlobalUsername()).setValue(bet);
         firebase.child("games").child(key).child("bets").child(userName).setValue(bet);
-
-
-        System.out.println("write ended");
     }
+
+    public void colorCells(int i, ViewGroup listView, long button, View currentView) {
+
+        System.out.println("color list: i = " + i + " button = " + button);
+
+        Button team1 = (Button) currentView.findViewById(R.id.buttonFirstTeam);
+        Button team2 = (Button) currentView.findViewById(R.id.buttonSecondTeam);
+        Button tie = (Button) currentView.findViewById(R.id.buttonTie);
+
+        team1.setBackgroundColor(Color.parseColor("#d0dddc"));
+        team2.setBackgroundColor(Color.parseColor("#d0dddc"));
+        tie.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+
+        if (button == 0) {
+            team1.setBackgroundColor(Color.parseColor("#FFFFFF02"));
+        } else if (button == 1) {
+            team2.setBackgroundColor(Color.parseColor("#FFFFFF02"));
+        } else if (button == 2) {
+            tie.setBackgroundColor(Color.parseColor("#FFFFFF02"));
+        }
+    }
+
+
+
+    //*********************************************************************************************
 
     public void colorList(int i, ViewGroup listView, long button) {
 
-        System.out.println("color list");
+        System.out.println("color list: i = " + i + " button = " + button);
 
         View v;
 
@@ -160,13 +178,11 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         team2.setBackgroundColor(Color.parseColor("#d0dddc"));
         tie.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
 
-        if (button == 0){
+        if (button == 0) {
             team1.setBackgroundColor(Color.parseColor("#FFFFFF02"));
-        }
-        else if (button == 1) {
+        } else if (button == 1) {
             team2.setBackgroundColor(Color.parseColor("#FFFFFF02"));
-        }
-        else if (button == 2) {
+        } else if (button == 2) {
             tie.setBackgroundColor(Color.parseColor("#FFFFFF02"));
         }
     }
@@ -175,7 +191,7 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         final int firstListItemPosition = listView.getFirstVisiblePosition();
         final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
-        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+        if (pos < firstListItemPosition || pos > lastListItemPosition) {
             return listView.getAdapter().getView(pos, null, listView);
         } else {
             final int childIndex = pos - firstListItemPosition;
