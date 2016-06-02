@@ -48,6 +48,8 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
             customView = myInflater.inflate(R.layout.singal_game, viewGroup, false);
         }
 
+        customView.setId(i);
+
         final View currentView = customView;
 
         Button team1 = (Button) customView.findViewById(R.id.buttonFirstTeam);
@@ -137,22 +139,27 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
 
     public void colorCells(int i, ViewGroup listView, long button, View currentView) {
 
-        System.out.println("color list: i = " + i + " button = " + button);
+        System.out.println(currentView.getId());
 
-        Button team1 = (Button) currentView.findViewById(R.id.buttonFirstTeam);
-        Button team2 = (Button) currentView.findViewById(R.id.buttonSecondTeam);
-        Button tie = (Button) currentView.findViewById(R.id.buttonTie);
+        System.out.println("color cells: i = " + i + " button = " + button);
 
-        team1.setBackgroundColor(Color.parseColor("#d0dddc"));
-        team2.setBackgroundColor(Color.parseColor("#d0dddc"));
-        tie.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+        if (i == currentView.getId()) {
 
-        if (button == 0) {
-            team1.setBackgroundColor(Color.parseColor("#FFFFFF02"));
-        } else if (button == 1) {
-            team2.setBackgroundColor(Color.parseColor("#FFFFFF02"));
-        } else if (button == 2) {
-            tie.setBackgroundColor(Color.parseColor("#FFFFFF02"));
+            Button team1 = (Button) currentView.findViewById(R.id.buttonFirstTeam);
+            Button team2 = (Button) currentView.findViewById(R.id.buttonSecondTeam);
+            Button tie = (Button) currentView.findViewById(R.id.buttonTie);
+
+            team1.setBackgroundColor(Color.parseColor("#d0dddc"));
+            team2.setBackgroundColor(Color.parseColor("#d0dddc"));
+            tie.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+
+            if (button == 0) {
+                team1.setBackgroundColor(Color.parseColor("#FFFFFF02"));
+            } else if (button == 1) {
+                team2.setBackgroundColor(Color.parseColor("#FFFFFF02"));
+            } else if (button == 2) {
+                tie.setBackgroundColor(Color.parseColor("#FFFFFF02"));
+            }
         }
     }
 
