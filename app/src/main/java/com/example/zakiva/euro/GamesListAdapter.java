@@ -29,11 +29,12 @@ import java.util.Map;
 public class GamesListAdapter extends ArrayAdapter<String[]> {
 
     private Context mContext;
-    public String userName = "user3";
+    public String userName;
 
     public GamesListAdapter(Context context, ArrayList<String[]> items) {
         super(context, R.layout.singal_game, items);
         this.mContext = context;
+        userName = ((Euro) mContext.getApplicationContext()).getGlobalUsername();
     }
 
 
@@ -62,7 +63,7 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         final String[] item = getItem(i);
         team1.setText(item[0]);
         team2.setText(item[1]);
-        tie.setText(item[5]); // should be item 2
+        tie.setText(item[2]);
         header.setText(item[3]);
 
         int bet = Integer.parseInt(item[4]);
@@ -94,7 +95,7 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         System.out.println("onClickListenersdone");
 
 
-        final Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        final Firebase firebase = new Firebase(mContext.getApplicationContext().getString(R.string.firebase));
 
         //better to change for listener only to the username. but require to initilize username for all games bets asap
 
@@ -131,7 +132,7 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
 
         System.out.println("writing bet...");
 
-        final Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        final Firebase firebase = new Firebase(mContext.getApplicationContext().getString(R.string.firebase));
 
         //  firebase.child("games").child(key).child("bets").child(((Euro) mContext.getApplicationContext()).getGlobalUsername()).setValue(bet);
         firebase.child("games").child(key).child("bets").child(userName).setValue(bet);

@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //((Euro) this.getApplication()).setGlobalUsername("global user name");
+        ((Euro) this.getApplication()).setGlobalUsername("global user name");
         Firebase.setAndroidContext(this);
-        firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        firebase = new Firebase(getString(R.string.firebase));
 
         isUserExist = 0;
         String curUsername = getFromLocalDatabase("username");
@@ -104,9 +104,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonCreateGamesClicked (View view) {
-
-        //Firebase.setAndroidContext(this);
-        //Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
 
         Game game1 = new Game(1, "Macabi", 2, "Hapoal", 5, 8, "May 30, 21:00");
         Game game2 = new Game(2, "Ramama", 1, "TLV", 3, 3, "May 20, 13:00");

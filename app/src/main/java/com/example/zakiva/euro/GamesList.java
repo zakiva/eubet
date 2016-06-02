@@ -17,15 +17,17 @@ import java.util.Map;
 public class GamesList extends AppCompatActivity {
 
     Firebase firebase;
-    public String userName = "user3";
+    public String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games_list);
 
+        userName = ((Euro) this.getApplication()).getGlobalUsername();
+
         Firebase.setAndroidContext(this);
-        firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        firebase = new Firebase(getString(R.string.firebase));
 
         firebase.child("games").addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -36,8 +38,9 @@ public class GamesList extends AppCompatActivity {
                 System.out.println(snapshot.getValue());
                 System.out.println(snapshot.getValue().getClass());
                 System.out.println(snapshot.getValue());
-                draw_games( (Map) snapshot.getValue());
+                draw_games((Map) snapshot.getValue());
             }
+
             @Override
             public void onCancelled(FirebaseError error) {
             }

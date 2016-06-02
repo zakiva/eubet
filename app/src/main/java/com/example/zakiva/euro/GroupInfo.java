@@ -29,7 +29,7 @@ public class GroupInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_info);
         //Firebase.setAndroidContext(this);
-        firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        firebase = new Firebase(getString(R.string.firebase));
 
         final Bundle extras = getIntent().getExtras();
         groupName = extras.getString("groupName");

@@ -22,7 +22,7 @@ public class WinningTeam extends AppCompatActivity {
         setContentView(R.layout.activity_winning_team);
         Firebase.setAndroidContext(this);
 
-        Firebase firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        Firebase firebase = new Firebase(getString(R.string.firebase));
 
         firebase.child("teams").addValueEventListener(new ValueEventListener() {
 

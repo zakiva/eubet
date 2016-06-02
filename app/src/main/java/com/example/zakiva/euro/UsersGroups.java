@@ -31,7 +31,7 @@ public class UsersGroups extends AppCompatActivity {
         ((TextView) findViewById(R.id.textView3)).setVisibility(View.INVISIBLE);
         ((Button) findViewById(R.id.buttonCreateOrJoin)).setVisibility(View.INVISIBLE);
         Firebase.setAndroidContext(this);
-        firebase = new Firebase("https://eurofirebase.firebaseio.com/");
+        firebase = new Firebase(getString(R.string.firebase));
         userName = getFromLocalDatabase("username");
     }
 
