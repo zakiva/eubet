@@ -32,8 +32,12 @@ public class GamesList extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 draw_games((Map) snapshot.getValue());
+                System.out.println("###############################");
+                System.out.println(snapshot.getValue());
+                System.out.println(snapshot.getValue().getClass());
+                System.out.println(snapshot.getValue());
+                draw_games( (Map) snapshot.getValue());
             }
-
             @Override
             public void onCancelled(FirebaseError error) {
             }

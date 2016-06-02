@@ -33,8 +33,6 @@ public class UsersGroups extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         firebase = new Firebase("https://eurofirebase.firebaseio.com/");
         userName = getFromLocalDatabase("username");
-
-
     }
 
     public void buttonCreateGroupClicked (View view){
@@ -82,7 +80,13 @@ public class UsersGroups extends AppCompatActivity {
                             firebase.child("BetGroups").child("GroupsNames").child(groupName).setValue(password);
                             firebase.child("BetGroups").child("GroupsToUsername").child(groupName).child(userName).setValue(true);
                             firebase.child("BetGroups").child("UsernameToGroups").child(userName).child(groupName).setValue(true);
+                            GroupMember groupmember = new GroupMember(userName, 0);
+                            firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).push().setValue(groupmember);
                             Toast.makeText(getApplicationContext(),"Group created!",Toast.LENGTH_SHORT).show();
+
+                            Intent gi = new Intent(UsersGroups.this, GroupInfo.class);
+                            gi.putExtra("groupName", groupName);
+                            startActivity(gi);
                         }
                     }
                     @Override
@@ -111,6 +115,8 @@ public class UsersGroups extends AppCompatActivity {
                             if (snapshot.child(groupName).getValue().equals(password)){
                                 firebase.child("BetGroups").child("GroupsToUsername").child(groupName).child(userName).setValue(true);
                                 firebase.child("BetGroups").child("UsernameToGroups").child(userName).child(groupName).setValue(true);
+                                GroupMember groupmember = new GroupMember(userName, 0);
+                                firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).push().setValue(groupmember);
                                 Toast.makeText(getApplicationContext(),"You have joined the group!",Toast.LENGTH_SHORT).show();
                             }
                             else{

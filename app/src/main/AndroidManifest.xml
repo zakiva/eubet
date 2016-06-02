@@ -18,10 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Bets"></activity>
-        <activity android:name=".WinningTeam"></activity>
-        <activity android:name=".GamesList"></activity>
-        <activity android:name=".UsersGroups"></activity>
+        <activity android:name=".Bets" />
+        <activity android:name=".WinningTeam" />
+        <activity android:name=".GamesList" />
+        <activity android:name=".UsersGroups" />
+        <activity android:name=".GroupInfo"></activity>
     </application>
 
 </manifest>
