@@ -18,28 +18,29 @@ public class MainActivity extends AppCompatActivity {
 
     private Firebase firebase;
     int isUserExist;
+    String curUsername = "NULL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ((Euro) this.getApplication()).setGlobalUsername("global user name");
         Firebase.setAndroidContext(this);
         firebase = new Firebase(getString(R.string.firebase));
-
         isUserExist = 0;
-        String curUsername = getFromLocalDatabase("username");
+        curUsername = getFromLocalDatabase("username");
         if (!curUsername.equals("NULL")){
             ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
             isUserExist = 1;
         }
+        ((Euro) this.getApplication()).setGlobalUsername(curUsername);
+
     }
     @Override
     public void onResume() {
         super.onResume();
         isUserExist = 0;
-        String curUsername = getFromLocalDatabase("username");
+        curUsername = getFromLocalDatabase("username");
         if (!curUsername.equals("NULL")){
             ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRestart() {
         super.onRestart();
         isUserExist = 0;
-        String curUsername = getFromLocalDatabase("username");
+        curUsername = getFromLocalDatabase("username");
         if (!curUsername.equals("NULL")){
             ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
@@ -73,11 +74,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonStartBetClicked(View view) {
+
         if (isUserExist == 1){
             Intent bets = new Intent(MainActivity.this, Bets.class);
             startActivity(bets);
             return;
         }
+        ((Euro) this.getApplication()).setGlobalUsername(curUsername);
         final String userName = ((EditText) findViewById(R.id.editText)).getText().toString();
         if (userName.equals("")){
             Toast.makeText(getApplicationContext(),"Pleae enter your user name",Toast.LENGTH_SHORT).show();
