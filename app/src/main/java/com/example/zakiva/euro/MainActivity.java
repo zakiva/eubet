@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonCreateGamesClicked (View view) {
 
-        Game game1 = new Game(1, "Macabi", 2, "Hapoal", 5, 8, "May 30, 21:00");
-        Game game2 = new Game(2, "Ramama", 1, "TLV", 3, 3, "May 20, 13:00");
-        Game game3 = new Game(3, "Eilat", 7, "NY", 1, 4, "May 10, 11:00");
-        Game game4 = new Game(4, "Israel", 5, "USA", 5, 9, "May 23, 21:00");
+        Game game1 = new Game(1, "Macabi", 2, "Hapoal", 5, 8, "May 30, 21:00", "Group A");
+        Game game2 = new Game(2, "Ramama", 1, "TLV", 3, 3, "May 20, 13:00", "Group B");
+        Game game3 = new Game(3, "Eilat", 7, "NY", 1, 4, "May 10, 11:00", "Group C");
+        Game game4 = new Game(4, "Israel", 5, "USA", 5, 9, "May 23, 21:00", "Group D");
 
         game1.bets.put("demoUserName", -1);
         game2.bets.put("demoUserName", -1);

@@ -11,6 +11,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -58,7 +60,7 @@ public class GamesList extends AppCompatActivity {
             Map game = (Map) entry.getValue();
             Map<String, Long> bets = (Map<String, Long>) game.get("bets");
 
-            final String[] item = new String[6];
+            final String[] item = new String[11];
             item[0] = " " + game.get("team1") + " " + Long.toString((long) game.get("score1"));
             item[1] = " " + game.get("team2") + " " + Long.toString((long) game.get("score2"));
             item[2] = " Tie " + game.get("scoreX");
@@ -66,9 +68,25 @@ public class GamesList extends AppCompatActivity {
             //item[4] = bets.get(((Euro) this.getApplication()).getGlobalUsername()) == null ? Integer.toString(-1) : Long.toString((long) bets.get(((Euro) this.getApplication()).getGlobalUsername()));
             item[4] = bets.get(userName) == null ? Integer.toString(-1) : Long.toString((long) bets.get(userName));
             item[5] = key;
+            item[10] = Long.toString((long) game.get("id"));
 
             items.add(item);
         }
+
+        Collections.sort(items, new Comparator() {
+
+                    public int compare(Object o1, Object o2) {
+                        String [] sa = (String []) o1;
+                        String [] sb = (String []) o2;
+
+                        int v = sa[10].compareTo(sb[10]);
+
+                        return v;
+
+                        // it can also return 0, and 1
+                    }
+                }
+        );
 
         ListAdapter listAdapter = new GamesListAdapter(getBaseContext(), items);
         ListView listView = (ListView) findViewById(R.id.gamesList);

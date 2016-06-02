@@ -17,7 +17,9 @@ public class Game {
     public String team2;
     public int score2;
     public int scoreX;
-    public  String time;
+    public String description;
+    public int result;
+    public String time;
     public Map<String, Integer> bets;
 
     // Required default constructor for Firebase object mapping
@@ -26,7 +28,7 @@ public class Game {
     }
 
 
-    public Game(int id, String team1, int score1, String team2, int score2, int scoreX, String time) {
+    public Game(int id, String team1, int score1, String team2, int score2, int scoreX, String time, String description) {
         this.id = id;
         this.team1 = team1;
         this.score1 = score1;
@@ -34,6 +36,8 @@ public class Game {
         this.score2 = score2;
         this.scoreX = scoreX;
         this.time = time;
+        this.description = description;
+        this.result = -1;
         bets = new HashMap <String, Integer>();
     }
 }
