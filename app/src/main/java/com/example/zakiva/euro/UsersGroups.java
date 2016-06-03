@@ -82,6 +82,8 @@ public class UsersGroups extends AppCompatActivity {
                             firebase.child("BetGroups").child("UsernameToGroups").child(userName).child(groupName).setValue(true);
                             GroupMember groupmember = new GroupMember(userName, 0);
                             firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).push().setValue(groupmember);
+                            GroupName groupname = new GroupName(groupName);
+                            firebase.child("BetGroups").child("UsernameToGroupsObjects").child(userName).push().setValue(groupname);
                             Toast.makeText(getApplicationContext(),"Group created!",Toast.LENGTH_SHORT).show();
 
                             Intent gi = new Intent(UsersGroups.this, GroupInfo.class);
@@ -117,7 +119,13 @@ public class UsersGroups extends AppCompatActivity {
                                 firebase.child("BetGroups").child("UsernameToGroups").child(userName).child(groupName).setValue(true);
                                 GroupMember groupmember = new GroupMember(userName, 0);
                                 firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).push().setValue(groupmember);
+                                GroupName groupname = new GroupName(groupName);
+                                firebase.child("BetGroups").child("UsernameToGroupsObjects").child(userName).push().setValue(groupname);
                                 Toast.makeText(getApplicationContext(),"You have joined the group!",Toast.LENGTH_SHORT).show();
+
+                                Intent gi = new Intent(UsersGroups.this, GroupInfo.class);
+                                gi.putExtra("groupName", groupName);
+                                startActivity(gi);
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"Wrong password",Toast.LENGTH_SHORT).show();

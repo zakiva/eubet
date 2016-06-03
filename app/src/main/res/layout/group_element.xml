@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/groupElement"
+        android:orientation="vertical"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp">
+
+        <Button
+            android:id="@+id/groupNameList"
+            android:text="group name"
+            android:textSize="16dp"
+            android:onClick="groupNameListClicked"
+            android:background="#d0dddc"
+            android:layout_width="fill_parent"
+            android:fontFamily="sans-serif"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonBetGroupsClicked (View view) {
-        Intent ug = new Intent(MainActivity.this, UsersGroups.class);
+        Intent ug = new Intent(MainActivity.this, MyGroups.class);
         startActivity(ug);
     }
 
