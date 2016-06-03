@@ -4,7 +4,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="#aefec33e">
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,33 +28,43 @@
         android:layout_marginTop="15dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Start bet"
+        android:textSize="25dp"
+        android:textAllCaps="false"
         android:id="@+id/buttonStartBet"
         android:layout_below="@+id/editText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="145dp"
-        android:onClick="buttonStartBetClicked" />
+        android:onClick="buttonStartBetClicked"
+        android:background="#ffffff" />
 
     <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="create games"
+        android:text="Create Games"
+        android:layout_width="fill_parent"
+        android:textSize="25dp"
+        android:background="#ffffff"
+        android:textAllCaps="false"
         android:onClick="buttonCreateGamesClicked"
         android:id="@+id/buttonCreateGames"
         android:layout_below="@+id/buttonStartBet"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp" />
+        android:layout_marginTop="40dp"
+         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Bet Groups"
+        android:textSize="25dp"
+        android:textAllCaps="false"
         android:onClick="buttonBetGroupsClicked"
         android:id="@+id/buttonBetGroups"
         android:layout_below="@+id/buttonCreateGames"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp" />
+        android:layout_marginTop="40dp"
+        android:background="#ffffff" />
 </RelativeLayout>
