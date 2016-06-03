@@ -81,8 +81,16 @@ public class GamesList extends AppCompatActivity {
         Collections.sort(items, new Comparator() {
 
                     public int compare(Object o1, Object o2) {
-                        String [] sa = (String []) o1;
-                        String [] sb = (String []) o2;
+                        String[] sa = (String[]) o1;
+                        String[] sb = (String[]) o2;
+
+                        if (Integer.parseInt(sa[11]) >= 0) {
+                            return 1;
+                        }
+                        if (Integer.parseInt(sb[11]) >= 0) {
+                            return -1;
+                        }
+
 
                         int v = sa[10].compareTo(sb[10]);
 

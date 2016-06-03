@@ -149,7 +149,7 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
 
         System.out.println(currentView.getId());
 
-        System.out.println("color cells: i = " + i + " button = " + button);
+        System.out.println("color cells: i = " + i + " button = " + button + " result = " + result);
 
         if (i == currentView.getId()) {
 
@@ -168,11 +168,11 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
             } else if (button == 2) {
                 tie.setBackgroundColor(Color.parseColor("#C676FBB0"));
             }
-            /*
+
 
             team1.setTextColor(Color.parseColor("#FF000000"));
-            team1.setTextColor(Color.parseColor("#FF000000"));
-            team1.setTextColor(Color.parseColor("#FF000000"));
+            team2.setTextColor(Color.parseColor("#FF000000"));
+            tie.setTextColor(Color.parseColor("#FF000000"));
 
             if (result == 0) {
                 team1.setTextColor(Color.parseColor("#FFFF0000"));
@@ -181,7 +181,7 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
             } else if (result == 2) {
                 tie.setTextColor(Color.parseColor("#FFFF0000"));
             }
-            */
+
         }
     }
 
