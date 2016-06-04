@@ -83,19 +83,19 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
 
         team1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                writeBet(i, item[5], 0);
+                writeBet(i, item[5], 0, result, currentView, viewGroup);
             }
         });
 
         team2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                writeBet(i, item[5], 1);
+                writeBet(i, item[5], 1, result, currentView, viewGroup);
             }
         });
 
         tie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                writeBet(i, item[5], 2);
+                writeBet(i, item[5], 2, result, currentView, viewGroup);
             }
         });
 
@@ -135,20 +135,26 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
     }
 
 
-    public void writeBet(int i, final String key, final long bet) {
+    public void writeBet(final int i, final String key, final long bet, final int result, final View currentView, final ViewGroup viewGroup) {
 
         System.out.println("writing bet...");
 
         final Firebase firebase = new Firebase(mContext.getApplicationContext().getString(R.string.firebase));
+
+        colorCells(i, viewGroup, bet, currentView, result);
 
         firebase.child("games").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                Map<String, Long> game = (Map<String, Long>) snapshot.getValue();
-                if (game.get("edit") == 1)
+                Map game = (Map) snapshot.getValue();
+                if ((long) game.get("edit") == 1)
                     makeWrite(key, bet);
+                else{
+                    colorCells(i, viewGroup, ((Map<String, Long>)game.get("bets")).get(userName), currentView, result);
+                }
+
             }
 
             @Override
