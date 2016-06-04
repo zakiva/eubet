@@ -22,4 +22,9 @@ public class Bets extends AppCompatActivity {
         Intent games = new Intent(Bets.this, GamesList.class);
         startActivity(games);
     }
+
+    public void buttonScorersClicked(View view) {
+        Intent scorer = new Intent(Bets.this, Scorer.class);
+        startActivity(scorer);
+    }
 }

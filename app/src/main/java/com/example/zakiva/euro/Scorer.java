@@ -15,23 +15,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-public class WinningTeam extends AppCompatActivity {
+public class Scorer extends AppCompatActivity {
 
     public String userName;
-    TextView chosenTeam;
+    TextView chosenPlayer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_winning_team);
+        setContentView(R.layout.activity_scorer);
         Firebase.setAndroidContext(this);
         userName = ((Euro) this.getApplication()).getGlobalUsername();
-        chosenTeam = (TextView) findViewById(R.id.chosenTeam);
+        chosenPlayer = (TextView) findViewById(R.id.chosenPlayer);
 
         Firebase firebase = new Firebase(getString(R.string.firebase));
 
-        firebase.child("teams").addValueEventListener(new ValueEventListener() {
+        firebase.child("players").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -39,7 +39,7 @@ public class WinningTeam extends AppCompatActivity {
                 System.out.println(snapshot.getValue());
                 System.out.println(snapshot.getValue().getClass());
 
-                draw_teams( (Map) snapshot.getValue());
+                draw_players((Map) snapshot.getValue());
 
             }
 
@@ -47,24 +47,20 @@ public class WinningTeam extends AppCompatActivity {
 
         });
 
-
-     //   String[] teams = {"England", "Germeny", "Spain", "Israel", "Italy", "Russia", "France", "England", "Germeny", "Spain", "Israel", "Italy", "Russia", "France",};
-     //   String[] scores = {"3", "6", "9", "6", "9", "2", "7", "3", "6", "9", "6", "9", "2", "7"};
-
-        firebase.child("Users").child(userName).child("winningTeam").addValueEventListener(new ValueEventListener() {
+        firebase.child("Users").child(userName).child("scorer").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                System.out.println("on data changed >>winning<<");
+                System.out.println("on data changed >>scorer<<");
 
-                Map<String, String> winningTeam = (Map<String, String>) snapshot.getValue();
+                Map<String, String> scorer = (Map<String, String>) snapshot.getValue();
 
-                if (winningTeam != null) {
-                    System.out.println(winningTeam.toString());
+                if (scorer != null) {
 
-                    chosenTeam.setText(winningTeam.get("name"));
+                    System.out.println(scorer.toString());
 
+                    chosenPlayer.setText(scorer.get("name"));
                 }
             }
 
@@ -76,7 +72,7 @@ public class WinningTeam extends AppCompatActivity {
 
     }
 
-    public void draw_teams (Map mp) {
+    public void draw_players (Map mp) {
         ArrayList<String> teams = new ArrayList<String>();
         ArrayList<String> scores = new ArrayList<String>();
 
@@ -102,8 +98,8 @@ public class WinningTeam extends AppCompatActivity {
         }
 
 
-        ListAdapter listAdapter = new WinningTeamAdapter(getBaseContext(), items, this);
-        ListView listView = (ListView) findViewById(R.id.listWinningTeams);
+        ListAdapter listAdapter = new ScorerAdapter(getBaseContext(), items, this);
+        ListView listView = (ListView) findViewById(R.id.listScorers);
         listView.setAdapter(listAdapter);
     }
 }
