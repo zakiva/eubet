@@ -33,14 +33,16 @@ public class WinningTeamAdapter extends ArrayAdapter<String[]> {
     LayoutInflater mInflater;
     public String userName;
     TextView chosenTeam;
+    long start;
 
-    public WinningTeamAdapter(Context context, ArrayList<String[]> items, Activity activity) {
+    public WinningTeamAdapter(Context context, ArrayList<String[]> items, Activity activity, long start) {
         super(context, R.layout.team, items);
         size = items.size();
         this.mContext = context;
         mInflater = activity.getLayoutInflater();
         userName = ((Euro) mContext.getApplicationContext()).getGlobalUsername();
         chosenTeam = (TextView) activity.findViewById(R.id.chosenTeam);
+        this.start = start;
     }
 
 
@@ -64,11 +66,14 @@ public class WinningTeamAdapter extends ArrayAdapter<String[]> {
             name.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
         }
 
-        name.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                writeBet(new Team(0, item[0], Integer.parseInt(item[1])));
-            }
-        });
+        if (start == 0) {
+            name.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    writeBet(new Team(0, item[0], Integer.parseInt(item[1])));
+                }
+            });
+
+               }
 
         return view;
     }

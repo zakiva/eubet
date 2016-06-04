@@ -87,7 +87,7 @@ public class Scorer extends AppCompatActivity {
             it.remove();
         }
 
-        ArrayList<String[]> items = new ArrayList<String[]>();
+        final ArrayList<String[]> items = new ArrayList<String[]>();
         String[] item;
 
         for (int i = 0; i < teams.size(); i++) {
@@ -97,8 +97,23 @@ public class Scorer extends AppCompatActivity {
             items.add(item);
         }
 
+        Firebase firebase = new Firebase(getString(R.string.firebase));
+        firebase.child("start").addValueEventListener(new ValueEventListener() {
 
-        ListAdapter listAdapter = new ScorerAdapter(getBaseContext(), items, this);
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                System.out.println(snapshot.getValue());
+                setAdapter((long) snapshot.getValue(), items);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void setAdapter (long start,  ArrayList<String[]> items) {
+        ListAdapter listAdapter = new ScorerAdapter(getBaseContext(), items, this, start);
         ListView listView = (ListView) findViewById(R.id.listScorers);
         listView.setAdapter(listAdapter);
     }

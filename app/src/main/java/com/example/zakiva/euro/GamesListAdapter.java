@@ -135,13 +135,30 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
     }
 
 
-    public void writeBet(int i, String key, long bet) {
+    public void writeBet(int i, final String key, final long bet) {
 
         System.out.println("writing bet...");
 
         final Firebase firebase = new Firebase(mContext.getApplicationContext().getString(R.string.firebase));
 
-        //  firebase.child("games").child(key).child("bets").child(((Euro) mContext.getApplicationContext()).getGlobalUsername()).setValue(bet);
+        firebase.child("games").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                Map<String, Long> game = (Map<String, Long>) snapshot.getValue();
+                if (game.get("edit") == 1)
+                    makeWrite(key, bet);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void makeWrite (final String key, final long bet) {
+        final Firebase firebase = new Firebase(mContext.getApplicationContext().getString(R.string.firebase));
         firebase.child("games").child(key).child("bets").child(userName).setValue(bet);
     }
 

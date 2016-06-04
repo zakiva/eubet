@@ -80,7 +80,7 @@ public class WinningTeam extends AppCompatActivity {
         ArrayList<String> teams = new ArrayList<String>();
         ArrayList<String> scores = new ArrayList<String>();
 
-        Iterator it = mp.entrySet().iterator();
+        final Iterator it = mp.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
@@ -91,7 +91,7 @@ public class WinningTeam extends AppCompatActivity {
             it.remove();
         }
 
-        ArrayList<String[]> items = new ArrayList<String[]>();
+        final ArrayList<String[]> items = new ArrayList<String[]>();
         String[] item;
 
         for (int i = 0; i < teams.size(); i++) {
@@ -101,8 +101,29 @@ public class WinningTeam extends AppCompatActivity {
             items.add(item);
         }
 
+        Firebase firebase = new Firebase(getString(R.string.firebase));
+        firebase.child("start").addValueEventListener(new ValueEventListener() {
 
-        ListAdapter listAdapter = new WinningTeamAdapter(getBaseContext(), items, this);
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                System.out.println(snapshot.getValue());
+                setAdapter((long) snapshot.getValue(), items);
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+
+
+
+    }
+
+    public void setAdapter (long start,  ArrayList<String[]> items) {
+        ListAdapter listAdapter = new WinningTeamAdapter(getBaseContext(), items, this, start);
         ListView listView = (ListView) findViewById(R.id.listWinningTeams);
         listView.setAdapter(listAdapter);
     }

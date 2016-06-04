@@ -32,13 +32,16 @@ public class ScorerAdapter extends ArrayAdapter<String[]> {
     public Context mContext;
     LayoutInflater mInflater;
     public String userName;
+    long start;
 
-    public ScorerAdapter(Context context, ArrayList<String[]> items, Activity activity) {
+
+    public ScorerAdapter(Context context, ArrayList<String[]> items, Activity activity, long start) {
         super(context, R.layout.team, items);
         size = items.size();
         this.mContext = context;
         mInflater = activity.getLayoutInflater();
         userName = ((Euro) mContext.getApplicationContext()).getGlobalUsername();
+        this.start = start;
     }
 
 
@@ -62,11 +65,14 @@ public class ScorerAdapter extends ArrayAdapter<String[]> {
             name.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
         }
 
-        name.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                writeBet(new Team(0, item[0], Integer.parseInt(item[1])));
-            }
-        });
+        if (start == 0) {
+
+            name.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    writeBet(new Team(0, item[0], Integer.parseInt(item[1])));
+                }
+            });
+        }
 
         return view;
     }
