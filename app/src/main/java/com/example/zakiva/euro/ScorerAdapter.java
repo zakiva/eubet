@@ -55,7 +55,7 @@ public class ScorerAdapter extends ArrayAdapter<String[]> {
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeWinningTeamBar);
         final Button name = (Button) view.findViewById(R.id.buttonTeamName);
         final String[] item = getItem(i);
-        name.setText(" " + item[0]  + " " + item[1]);
+        name.setText(" " + item[0]  + ". " + item[1]);
         if (i % 2 == 0){
             relativeLayout.setBackgroundColor(Color.parseColor("#fbf5f6bb"));
             name.setBackgroundColor(Color.parseColor("#fbf5f6bb"));

@@ -84,19 +84,19 @@ public class GamesList extends AppCompatActivity {
                         String[] sa = (String[]) o1;
                         String[] sb = (String[]) o2;
 
-                        if (Integer.parseInt(sa[11]) >= 0) {
+                        if (Integer.parseInt(sa[11]) >= 0 && Integer.parseInt(sb[11]) < 0) {
                             return 1;
                         }
-                        if (Integer.parseInt(sb[11]) >= 0) {
+                        if (Integer.parseInt(sb[11]) >= 0 && Integer.parseInt(sa[11]) < 0) {
                             return -1;
                         }
 
 
-                        int v = sa[10].compareTo(sb[10]);
+                        int a = Integer.parseInt(sa[10]);
+                        int b = Integer.parseInt(sb[10]);
 
-                        return v;
+                        return a-b;
 
-                        // it can also return 0, and 1
                     }
                 }
         );

@@ -12,6 +12,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -60,7 +62,7 @@ public class Scorer extends AppCompatActivity {
 
                     System.out.println(scorer.toString());
 
-                    chosenPlayer.setText(scorer.get("name"));
+                    chosenPlayer.setText(scorer.get("name") + ".");
                 }
             }
 
@@ -113,6 +115,22 @@ public class Scorer extends AppCompatActivity {
     }
 
     public void setAdapter (long start,  ArrayList<String[]> items) {
+
+        Collections.sort(items, new Comparator() {
+
+                    public int compare(Object o1, Object o2) {
+                        String[] sa = (String[]) o1;
+                        String[] sb = (String[]) o2;
+
+                        int a = Integer.parseInt(sa[1]);
+                        int b = Integer.parseInt(sb[1]);
+
+                        return a - b;
+
+                        // it can also return 0, and 1
+                    }
+                }
+        );
         ListAdapter listAdapter = new ScorerAdapter(getBaseContext(), items, this, start);
         ListView listView = (ListView) findViewById(R.id.listScorers);
         listView.setAdapter(listAdapter);
