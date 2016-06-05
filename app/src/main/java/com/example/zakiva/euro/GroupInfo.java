@@ -17,6 +17,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import android.widget.ListView;
 
+import java.util.Map;
+
 public class GroupInfo extends AppCompatActivity {
 
     private Firebase firebase;
@@ -65,15 +67,103 @@ public class GroupInfo extends AppCompatActivity {
                 try {
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(number, null, content, null, null);
-                    Toast.makeText(getApplicationContext(),"Invitation sent",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Invitation sent", Toast.LENGTH_SHORT).show();
                 } catch (Exception e1) {
-                    Toast.makeText(getApplicationContext(),"Problem sending sms",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Problem sending sms", Toast.LENGTH_SHORT).show();
 
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }
         });
+    }
+
+    public void calculateScoreForUser (final String user) {
+
+        firebase.child("games").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                long totalScore = 0;
+
+                Map<String, Object> games = (Map) snapshot.getValue();
+
+                for (Map.Entry<String, Object> entry : games.entrySet()) {
+                    Map game = (Map) entry.getValue();
+                    Map<String, Long> bets = (Map<String, Long>) game.get("bets");
+                    long result = (long) game.get("result");
+                    if (bets.get(user) == null)
+                        continue;
+                    long userBet = (long) bets.get(user);
+                    if (result>=0){
+                        if (result==userBet){
+                            if (result==0){
+                                totalScore += (long) game.get("score1");
+                            }
+                            else if (result==1){
+                                totalScore += (long) game.get("score2");
+                            }
+                            else if (result == 2){
+                                totalScore += (long) game.get("scoreX");
+                            }
+                        }
+                    }
+
+                }
+                addGeneralResultsAndWrite(totalScore, user);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+
+
+    public void addGeneralResultsAndWrite(final long gamesScore, final String userName){
+
+        firebase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                long totalScore = gamesScore;
+
+                Map<String, Object> data = (Map) snapshot.getValue();
+                String winner = (String) data.get("winner");
+                String scorer = (String) data.get("scorer");
+
+                Map<String, Object> users = (Map) data.get("Users");
+                Map<String, Object> user = (Map) users.get(userName);
+
+                if (user.get("winningTeam") != null) {
+                    Map<String, Object> winningTeam = (Map) user.get("winningTeam");
+                    String team = (String) winningTeam.get("name");
+                    if (team.equals(winner))
+                        totalScore += (long) winningTeam.get("score");
+                }
+
+                if (user.get("scorer") != null) {
+                    Map<String, Object> scorerChosen = (Map) user.get("scorer");
+                    String player = (String) scorerChosen.get("name");
+                    if (player.equals(scorer))
+                        totalScore += (long) scorerChosen.get("score");
+                }
+
+                writeUserScore(userName, totalScore);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+
+    }
+
+    public void writeUserScore (String userName, long score) {
+        firebase.child("Users").child(userName).child("score").setValue(score);
     }
 }
