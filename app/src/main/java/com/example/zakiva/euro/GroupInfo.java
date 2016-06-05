@@ -1,5 +1,6 @@
 package com.example.zakiva.euro;
 
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +37,23 @@ public class GroupInfo extends AppCompatActivity {
         final Bundle extras = getIntent().getExtras();
         groupName = extras.getString("groupName");
         ((TextView) findViewById(R.id.textView)).setText(groupName);
+
+        firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                //Log.e("Count " ,""+snapshot.getChildrenCount());
+                for (DataSnapshot member: snapshot.getChildren()) {
+                    GroupMember groupmember = member.getValue(GroupMember.class);
+                    //Log.d(groupmember.getUsername(), member.getKey());
+                    //Log.e("Get Data", post.<YourMethod>());
+                    calculateScoreForUser(groupmember.getUsername(), member.getKey());
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                //Log.e("The read failed: " ,firebaseError.getMessage());
+            }
+        });
 
         setListeners();
     }
@@ -80,7 +98,7 @@ public class GroupInfo extends AppCompatActivity {
         });
     }
 
-    public void calculateScoreForUser (final String user) {
+    public void calculateScoreForUser (final String user, final String key) {
 
         firebase.child("games").addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -113,7 +131,7 @@ public class GroupInfo extends AppCompatActivity {
                     }
 
                 }
-                addGeneralResultsAndWrite(totalScore, user);
+                addGeneralResultsAndWrite(totalScore, user, key);
             }
 
             @Override
@@ -124,7 +142,7 @@ public class GroupInfo extends AppCompatActivity {
 
 
 
-    public void addGeneralResultsAndWrite(final long gamesScore, final String userName){
+    public void addGeneralResultsAndWrite(final long gamesScore, final String userName, final String key){
 
         firebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -153,7 +171,7 @@ public class GroupInfo extends AppCompatActivity {
                         totalScore += (long) scorerChosen.get("score");
                 }
 
-                writeUserScore(userName, totalScore);
+                writeUserScore(userName, totalScore, key);
             }
 
             @Override
@@ -163,7 +181,13 @@ public class GroupInfo extends AppCompatActivity {
 
     }
 
-    public void writeUserScore (String userName, long score) {
-        firebase.child("Users").child(userName).child("score").setValue(score);
+    public void writeUserScore (String userName, long score, String key) {
+        int s = (int) score;
+        //GroupMember groupmember = new GroupMember(userName, s, s * (-1));
+        //s = 5;
+        //Log.d(userName, ": " + key);
+        firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).child(key).child("score").setValue(s);
+        firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).child(key).child("minusScore").setValue(-1*s);
+        //firebase.child("Users").child(userName).child("score").child(key).child("score").setValue(score);
     }
 }

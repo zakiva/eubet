@@ -39,6 +39,8 @@ public class GroupMemberListAdapter extends FirebaseListAdapter<GroupMember> {
      */
     @Override
     protected void populateView(View view, GroupMember groupmember) {
+
+
         final String username = groupmember.getUsername();
         TextView textUsername = (TextView) view.findViewById(R.id.name);
         textUsername.setText(username);
