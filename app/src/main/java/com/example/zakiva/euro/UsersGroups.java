@@ -80,7 +80,7 @@ public class UsersGroups extends AppCompatActivity {
                             firebase.child("BetGroups").child("GroupsNames").child(groupName).setValue(password);
                             firebase.child("BetGroups").child("GroupsToUsername").child(groupName).child(userName).setValue(true);
                             firebase.child("BetGroups").child("UsernameToGroups").child(userName).child(groupName).setValue(true);
-                            GroupMember groupmember = new GroupMember(userName, 0);
+                            GroupMember groupmember = new GroupMember(userName, 0, 0);
                             firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).push().setValue(groupmember);
                             GroupName groupname = new GroupName(groupName);
                             firebase.child("BetGroups").child("UsernameToGroupsObjects").child(userName).push().setValue(groupname);
@@ -117,7 +117,7 @@ public class UsersGroups extends AppCompatActivity {
                             if (snapshot.child(groupName).getValue().equals(password)){
                                 firebase.child("BetGroups").child("GroupsToUsername").child(groupName).child(userName).setValue(true);
                                 firebase.child("BetGroups").child("UsernameToGroups").child(userName).child(groupName).setValue(true);
-                                GroupMember groupmember = new GroupMember(userName, 0);
+                                GroupMember groupmember = new GroupMember(userName, 0, 0);
                                 firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).push().setValue(groupmember);
                                 GroupName groupname = new GroupName(groupName);
                                 firebase.child("BetGroups").child("UsernameToGroupsObjects").child(userName).push().setValue(groupname);

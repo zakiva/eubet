@@ -3,6 +3,7 @@ package com.example.zakiva.euro;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -17,6 +18,7 @@ import com.firebase.client.Query;
 public class GroupMemberListAdapter extends FirebaseListAdapter<GroupMember> {
 
     //private String mUsername;
+    int i = 0;
     private Context context;
 
     // The mUsername for this client. We use this to indicate which messages originated from this user
@@ -40,13 +42,18 @@ public class GroupMemberListAdapter extends FirebaseListAdapter<GroupMember> {
         final String username = groupmember.getUsername();
         TextView textUsername = (TextView) view.findViewById(R.id.name);
         textUsername.setText(username);
-
         final int score = groupmember.getScore();
         TextView textScore = (TextView) view.findViewById(R.id.score);
         textScore.setText(Integer.toString(score));
 
-
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.memberElement);
+        if (i == 0) {
+            relativeLayout.setBackgroundColor(Color.parseColor("#d0dddc"));
+            i = 1;
+        } else {
+            relativeLayout.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+            i = 0;
+        }
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT

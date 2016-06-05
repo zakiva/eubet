@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,11 +20,13 @@ public class MainActivity extends AppCompatActivity {
     private Firebase firebase;
     int isUserExist;
     String curUsername = "NULL";
+    Button b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        b = (Button) findViewById(R.id.buttonStartBet);
         Firebase.setAndroidContext(this);
         firebase = new Firebase(getString(R.string.firebase));
         isUserExist = 0;
@@ -31,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
         if (!curUsername.equals("NULL")){
             ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
+            b.setText("Start bet");
             isUserExist = 1;
+        } else {
+            b.setText("Login");
         }
         ((Euro) this.getApplication()).setGlobalUsername(curUsername);
 
@@ -39,24 +45,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        b = (Button) findViewById(R.id.buttonStartBet);
         isUserExist = 0;
         curUsername = getFromLocalDatabase("username");
         if (!curUsername.equals("NULL")){
             ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
+            b.setText("Start bet");
             isUserExist = 1;
+        } else {
+            b.setText("Login");
         }
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
+        b = (Button) findViewById(R.id.buttonStartBet);
         isUserExist = 0;
         curUsername = getFromLocalDatabase("username");
         if (!curUsername.equals("NULL")){
             ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
+            b.setText("Start bet");
             isUserExist = 1;
+        } else {
+            b.setText("Login");
         }
     }
 
@@ -83,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         ((Euro) this.getApplication()).setGlobalUsername(curUsername);
         final String userName = ((EditText) findViewById(R.id.editText)).getText().toString();
         if (userName.equals("")){
-            Toast.makeText(getApplicationContext(),"Pleae enter your user name",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Please enter your user name",Toast.LENGTH_SHORT).show();
         }
         else {
             firebase.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -95,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     else {
                         storeInLocalDatabae("username", userName);
                         firebase.child("Users").child(userName).setValue(true);
-                        Intent bets = new Intent(MainActivity.this, Bets.class);
+                        Intent bets = new Intent(MainActivity.this, MainActivity.class);
                         startActivity(bets);
                     }
                 }
@@ -126,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonBetGroupsClicked (View view) {
+        if (curUsername.equals("NULL")){
+            Toast.makeText(getApplicationContext(),"Please login",Toast.LENGTH_SHORT).show();
+            return;
+        }
         Intent ug = new Intent(MainActivity.this, MyGroups.class);
         startActivity(ug);
     }

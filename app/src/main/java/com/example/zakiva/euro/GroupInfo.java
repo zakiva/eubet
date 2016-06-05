@@ -43,7 +43,7 @@ public class GroupInfo extends AppCompatActivity {
         //final ListView listView = getListView();
         final ListView listView = (ListView) findViewById(R.id.memberList);
         // Tell our list adapter that we only want 50 messages at a time
-        final GroupMemberListAdapter mGroupMemberListAdapter = new GroupMemberListAdapter(firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName), this, R.layout.member_element);
+        final GroupMemberListAdapter mGroupMemberListAdapter = new GroupMemberListAdapter(firebase.child("BetGroups").child("GroupsToUsernameObjects").child(groupName).orderByChild("minusScore"), this, R.layout.member_element);
         listView.setAdapter(mGroupMemberListAdapter);
         mGroupMemberListAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override

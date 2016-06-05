@@ -9,14 +9,16 @@ import java.util.List;
 public class GroupMember {
     String username;
     int score;
+    int minusScore;
 
     // Required default constructor for Firebase object mapping
     GroupMember(){
     }
 
-    GroupMember(String username, int score) {
+    GroupMember(String username, int score, int minusScore) {
         this.username = username;
         this.score = score;
+        this.minusScore = minusScore;
     }
 
     public String getUsername() {
@@ -25,5 +27,9 @@ public class GroupMember {
 
     public int getScore() {
         return score;
+    }
+
+    public int getMinusScore() {
+        return minusScore;
     }
 }

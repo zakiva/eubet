@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#aefec33e"
     tools:context="com.example.zakiva.euro.UsersGroups">
 
     <TextView
@@ -22,25 +23,29 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="create group"
+        android:text="Create group"
         android:id="@+id/buttonCreateGroup"
         android:layout_below="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
+        android:background="#ffffff"
+        android:textAllCaps="false"
         android:onClick="buttonCreateGroupClicked" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="join group"
+        android:text="Join group"
         android:id="@+id/buttonJoinGroup"
         android:layout_below="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
+        android:background="#ffffff"
+        android:textAllCaps="false"
         android:onClick="buttonJoinGroupClicked" />
 
     <TextView
@@ -94,6 +99,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="375dp"
+        android:background="#ffffff"
+        android:textAllCaps="false"
         android:onClick="buttonCreateOrJoinClicked" />
 
 </RelativeLayout>

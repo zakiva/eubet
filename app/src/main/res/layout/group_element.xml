@@ -13,12 +13,13 @@
 
         <Button
             android:id="@+id/groupNameList"
-            android:text="group name"
+            android:text="Group Name"
             android:textSize="16dp"
             android:onClick="groupNameListClicked"
             android:background="#d0dddc"
             android:layout_width="fill_parent"
             android:fontFamily="sans-serif"
+            android:textAllCaps="false"
             android:layout_height="wrap_content" />
 
     </RelativeLayout>

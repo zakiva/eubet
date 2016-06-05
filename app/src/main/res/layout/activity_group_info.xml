@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#aefec33e"
     tools:context="com.example.zakiva.euro.GroupInfo">
 
     <TextView
@@ -47,10 +48,10 @@
         android:text="Invite friend"
         android:id="@+id/buttonInvite"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="80dp"
+        android:background="#ffffff"
+        android:textAllCaps="false"
+        android:textSize="20dp"
         android:onClick="buttonInviteClicked" />
 
     <TextView
