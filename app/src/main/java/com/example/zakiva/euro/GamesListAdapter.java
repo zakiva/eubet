@@ -152,7 +152,13 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
                 if ((long) game.get("edit") == 1)
                     makeWrite(key, bet);
                 else{
-                    colorCells(i, viewGroup, ((Map<String, Long>)game.get("bets")).get(userName), currentView, result);
+                    System.out.println("key = " + key + " username = " + userName + " bet = " + bet);
+                    if (((Map<String, Object>)game.get("bets")).get(userName) != null) {
+                        colorCells(i, viewGroup, ((Map<String, Long>) game.get("bets")).get(userName), currentView, result);
+                    }
+                    else{
+                        colorCells(i, viewGroup, -1, currentView, result);
+                    }
                 }
 
             }
@@ -164,6 +170,8 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
     }
 
     public void makeWrite (final String key, final long bet) {
+        System.out.println("key = " + key + " username = " + userName + " bet = " + bet);
+
         final Firebase firebase = new Firebase(mContext.getApplicationContext().getString(R.string.firebase));
         firebase.child("games").child(key).child("bets").child(userName).setValue(bet);
     }
