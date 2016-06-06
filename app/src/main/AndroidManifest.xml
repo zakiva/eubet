@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.zakiva.euro" >
+    package="com.example.zakiva.euro">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -12,24 +12,35 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Bets"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".WinningTeam" />
-        <activity android:name=".GamesList" />
-        <activity android:name=".UsersGroups" />
-        <activity android:name=".GroupInfo" />
-        <activity android:name=".MyGroups" />
-        <activity android:name=".Scorer" >
-        </activity>
+        <activity
+            android:name=".Bets"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WinningTeam"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GamesList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UsersGroups"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GroupInfo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MyGroups"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Scorer"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
