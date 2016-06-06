@@ -114,20 +114,31 @@ public class GamesList extends AppCompatActivity {
 
     public void buttonCreateGamesClicked (View view) {
 
-        Game game1 = new Game(1, "Northern Ireland", 2, "Northern Ireland", 5, 8, "May 30, 21:00", "Group A");
-        Game game2 = new Game(2, "Ramama", 1, "TLV", 3, 3, "May 20, 13:00", "Group B");
-        Game game3 = new Game(3, "Eilat", 7, "NY", 1, 4, "May 10, 11:00", "Group C");
-        Game game4 = new Game(4, "Israel", 5, "USA", 5, 9, "May 23, 21:00", "Group D");
+        //Game game1 = new Game(1, "France", 2, "Romania", 24, 10, "10 June, 22:00", "Group A");
+        //Game game2 = new Game(2, "Albania", 11, "Switzerland", 3, 7, "11 June, 16:00", "Group A");
+        //Game game3 = new Game(3, "Wales", 6, "Slovakia", 6, 6, "11 June, 19:00", "Group B");
+        //Game game4 = new Game(4, "England", 4, "Russia", 8, 6, "11 June, 22:00", "Group B");
 
-        game1.bets.put("demoUserName", -1);
-        game2.bets.put("demoUserName", -1);
-        game3.bets.put("demoUserName", -1);
-        game4.bets.put("demoUserName", -1);
+        //Game game1 = new Game(5, "Turkey", 8, "Croatia", 4, 6, "12 June, 16:00", "Group D");
+        //Game game2 = new Game(6, "Poland", 3, "Northen Ireland", 12, 7, "12 June, 19:00", "Group C");
+        //Game game3 = new Game(7, "Germany", 2, "Ukraine", 14, 8, "12 June, 22:00", "Group C");
+
+        //Game game1 = new Game(8, "Spain", 2, "Czech Republic", 8, 16, "13 June, 16:00", "Group D");
+        //Game game2 = new Game(9, "Ireland", 7, "Sweden", 6, 5, "13 June, 19:00", "Group E");
+        //Game game3 = new Game(10, "Belgium", 5, "Italy", 7, 6, "13 June, 22:00", "Group E");
+
+      //  Game game1 = new Game(11, "Austria", 3, "Hungary", 10, 6, "14 June, 19:00", "Group F");
+     //   Game game2 = new Game(12, "Portugal", 2, "Iceland", 14, 7, "14 June, 22:00", "Group F");
+
+      //  game1.bets.put("demoUserName", -1);
+       // game2.bets.put("demoUserName", -1);
+       // game3.bets.put("demoUserName", -1);
+       // game4.bets.put("demoUserName", -1);
 
 
-        firebase.child("games").push().setValue(game1);
-        firebase.child("games").push().setValue(game2);
-        firebase.child("games").push().setValue(game3);
-        firebase.child("games").push().setValue(game4);
+      //  firebase.child("games").push().setValue(game1);
+      //  firebase.child("games").push().setValue(game2);
+       // firebase.child("games").push().setValue(game3);
+       // firebase.child("games").push().setValue(game4);
     }
 }
