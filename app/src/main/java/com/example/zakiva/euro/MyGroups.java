@@ -5,6 +5,7 @@ import android.database.DataSetObserver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.firebase.client.Firebase;
@@ -13,6 +14,26 @@ public class MyGroups extends AppCompatActivity {
 
     private Firebase firebase;
     String userName;
+    Button b1;
+    Button b2;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        b1 = ((Button) findViewById(R.id.buttonCreateGroup));
+        b2 = ((Button) findViewById(R.id.buttonJoinGroup));
+        b1.setEnabled(true);
+        b2.setEnabled(true);
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        b1 = ((Button) findViewById(R.id.buttonCreateGroup));
+        b2 = ((Button) findViewById(R.id.buttonJoinGroup));
+        b1.setEnabled(true);
+        b2.setEnabled(true);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +41,8 @@ public class MyGroups extends AppCompatActivity {
         setContentView(R.layout.activity_my_groups);
         firebase = new Firebase(getString(R.string.firebase));
         userName = ((Euro) this.getApplication()).getGlobalUsername();
+        b1 = (Button) findViewById(R.id.buttonCreateGroup);
+        b2 = (Button) findViewById(R.id.buttonJoinGroup);
         setListeners();
     }
 
@@ -40,12 +63,16 @@ public class MyGroups extends AppCompatActivity {
     }
 
     public void buttonJoinGroupClicked (View view){
+        b1.setEnabled(false);
+        b2.setEnabled(false);
         Intent ug = new Intent(MyGroups.this, UsersGroups.class);
         ug.putExtra("createOrJoinFlag", "join");
         startActivity(ug);
     }
 
     public void buttonCreateGroupClicked (View view){
+        b1.setEnabled(false);
+        b2.setEnabled(false);
         Intent ug = new Intent(MyGroups.this, UsersGroups.class);
         ug.putExtra("createOrJoinFlag", "create");
         startActivity(ug);

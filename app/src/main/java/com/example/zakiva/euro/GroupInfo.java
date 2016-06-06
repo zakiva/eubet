@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class GroupInfo extends AppCompatActivity {
     String groupName;
     String password;
     String number;
+    Button b;
 
 
 
@@ -136,20 +138,27 @@ public class GroupInfo extends AppCompatActivity {
 
 
     public void buttonInviteClicked (View view) {
+        b = (Button) findViewById(R.id.buttonInvite);
+        b.setEnabled(false);
         number = ((EditText) findViewById(R.id.editText)).getText().toString();
-        firebase.child("BetGroups").child("GroupsNames").addListenerForSingleValueEvent(new ValueEventListener() {
+        firebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                password = (String) snapshot.child(groupName).getValue();
-                String content = "You were invited to join group " + groupName + ". The password is " + password;
+                password = (String) snapshot.child("BetGroups").child("GroupsNames").child(groupName).getValue();
+                String url = (String) snapshot.child("download").getValue();
+                String content = "Play Eubet! Group name: " + groupName + ". The password is " + password +". Download app from: " + url;
+                //Log.d("aaaaa:", content);
                 //Log.d("sms:", content);
                 try {
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(number, null, content, null, null);
                     Toast.makeText(getApplicationContext(), "Invitation sent", Toast.LENGTH_SHORT).show();
+                    ((EditText) findViewById(R.id.editText)).setText("");
+                    b.setEnabled(true);
                 } catch (Exception e1) {
                     Toast.makeText(getApplicationContext(), "Problem sending sms", Toast.LENGTH_SHORT).show();
-
+                    ((EditText) findViewById(R.id.editText)).setText("");
+                    b.setEnabled(true);
                 }
             }
 

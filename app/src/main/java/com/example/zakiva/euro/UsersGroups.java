@@ -20,7 +20,21 @@ public class UsersGroups extends AppCompatActivity {
     private Firebase firebase;
     String userName = "";
     String createOrJoinFlag = "";
+    Button b;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        b = ((Button) findViewById(R.id.buttonCreateOrJoin));
+        b.setEnabled(true);
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        b = ((Button) findViewById(R.id.buttonCreateOrJoin));
+        b.setEnabled(true);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +44,7 @@ public class UsersGroups extends AppCompatActivity {
         //((EditText) findViewById(R.id.editText2)).setVisibility(View.INVISIBLE);
         //((TextView) findViewById(R.id.textView2)).setVisibility(View.INVISIBLE);
         //((TextView) findViewById(R.id.textView3)).setVisibility(View.INVISIBLE);
-        //((Button) findViewById(R.id.buttonCreateOrJoin)).setVisibility(View.INVISIBLE);
+        b = ((Button) findViewById(R.id.buttonCreateOrJoin));
         Firebase.setAndroidContext(this);
         firebase = new Firebase(getString(R.string.firebase));
         userName = getFromLocalDatabase("username");
@@ -46,14 +60,17 @@ public class UsersGroups extends AppCompatActivity {
     }
 
     public void buttonCreateOrJoinClicked (View view){
+        b.setEnabled(false);
         if (!createOrJoinFlag.equals("join")){ // Create new group
             final String groupName = ((EditText) findViewById(R.id.editText)).getText().toString();
             final String password = ((EditText) findViewById(R.id.editText2)).getText().toString();
             if (groupName.equals("")){
                 Toast.makeText(getApplicationContext(),"Pleae enter group name",Toast.LENGTH_SHORT).show();
+                b.setEnabled(true);
             }
             else if (password.equals("")){
                 Toast.makeText(getApplicationContext(),"Pleae enter password",Toast.LENGTH_SHORT).show();
+                b.setEnabled(true);
             }
             else {
                 firebase.child("BetGroups").child("GroupsNames").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -88,9 +105,11 @@ public class UsersGroups extends AppCompatActivity {
             final String password = ((EditText) findViewById(R.id.editText2)).getText().toString();
             if (groupName.equals("")){
                 Toast.makeText(getApplicationContext(),"Pleae enter group name",Toast.LENGTH_SHORT).show();
+                b.setEnabled(true);
             }
             else if (password.equals("")){
                 Toast.makeText(getApplicationContext(),"Pleae enter password",Toast.LENGTH_SHORT).show();
+                b.setEnabled(true);
             }
             else {
                 firebase.child("BetGroups").child("GroupsNames").addListenerForSingleValueEvent(new ValueEventListener() {

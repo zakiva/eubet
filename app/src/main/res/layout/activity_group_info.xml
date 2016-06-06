@@ -41,9 +41,9 @@
         android:singleLine="true"
         android:inputType="number"
         android:id="@+id/editText"
-        android:minWidth="100dp"
+        android:ems="7"
         android:layout_below="@+id/textView2"
-        android:hint="Type number or click:"
+        android:hint="Type or click:"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp" />

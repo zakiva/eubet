@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonStartBetClicked(View view) {
+        b.setEnabled(false);
 
         if (isUserExist == 1){
             Intent bets = new Intent(MainActivity.this, Bets.class);
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         final String userName = ((EditText) findViewById(R.id.editText)).getText().toString();
         if (userName.equals("")){
             Toast.makeText(getApplicationContext(),"Please enter your user name",Toast.LENGTH_SHORT).show();
+            b.setEnabled(true);
         }
         else {
             firebase.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     if (snapshot.child(userName).exists()){
                         Toast.makeText(getApplicationContext(),"User name already taken. Please choose another",Toast.LENGTH_SHORT).show();
+                        b.setEnabled(true);
                     }
                     else {
                         storeInLocalDatabae("username", userName);
