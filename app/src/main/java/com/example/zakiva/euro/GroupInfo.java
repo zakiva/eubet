@@ -155,20 +155,23 @@ public class GroupInfo extends AppCompatActivity {
                 String scorer = (String) data.get("scorer");
 
                 Map<String, Object> users = (Map) data.get("Users");
-                Map<String, Object> user = (Map) users.get(userName);
+                Object o = users.get(userName);
+                if (!(o.getClass().equals(Boolean.class))) {
+                    Map<String, Object> user = (Map) users.get(userName);
 
-                if (user.get("winningTeam") != null) {
-                    Map<String, Object> winningTeam = (Map) user.get("winningTeam");
-                    String team = (String) winningTeam.get("name");
-                    if (team.equals(winner))
-                        totalScore += (long) winningTeam.get("score");
-                }
+                    if (user.get("winningTeam") != null) {
+                        Map<String, Object> winningTeam = (Map) user.get("winningTeam");
+                        String team = (String) winningTeam.get("name");
+                        if (team.equals(winner))
+                            totalScore += (long) winningTeam.get("score");
+                    }
 
-                if (user.get("scorer") != null) {
-                    Map<String, Object> scorerChosen = (Map) user.get("scorer");
-                    String player = (String) scorerChosen.get("name");
-                    if (player.equals(scorer))
-                        totalScore += (long) scorerChosen.get("score");
+                    if (user.get("scorer") != null) {
+                        Map<String, Object> scorerChosen = (Map) user.get("scorer");
+                        String player = (String) scorerChosen.get("name");
+                        if (player.equals(scorer))
+                            totalScore += (long) scorerChosen.get("score");
+                    }
                 }
 
                 writeUserScore(userName, totalScore, key);
