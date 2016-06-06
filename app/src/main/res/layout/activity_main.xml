@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Welcome! What's your name?"
+        android:text="Welcome! Please enter your name (friends can see this name)"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -39,7 +39,7 @@
         android:layout_below="@+id/editText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="120dp"
         android:onClick="buttonStartBetClicked"
         android:background="#ffffff" />
 

@@ -8,13 +8,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/groupElement"
         android:orientation="vertical"
-        android:layout_marginBottom="3dp"
-        android:layout_marginTop="3dp">
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp">
 
         <Button
             android:id="@+id/groupNameList"
             android:text="Group Name"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:onClick="groupNameListClicked"
             android:background="#d0dddc"
             android:layout_width="fill_parent"
