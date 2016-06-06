@@ -12,8 +12,8 @@
         android:id="@+id/listWinningTeams"
         android:layout_width="fill_parent"
         android:divider="@null"
-        android:layout_below="@+id/chosenTeam"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/time"
+        android:layout_marginTop="6dp"
         android:dividerHeight="0dp"
         android:layout_height="wrap_content"
         android:transcriptMode="alwaysScroll" />
@@ -22,10 +22,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:layout_marginTop="5dp"
         android:textSize="30dp"
         android:textAllCaps="false"
         android:id="@+id/chosenTeam"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open till June 10, 22:00"
+        android:textSize="14dp"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:layout_below="@+id/chosenTeam"
+        android:id="@+id/time"
         android:layout_centerHorizontal="true" />
 
     <ImageView
