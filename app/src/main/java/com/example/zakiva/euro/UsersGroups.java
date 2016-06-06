@@ -78,6 +78,7 @@ public class UsersGroups extends AppCompatActivity {
                     public void onDataChange(DataSnapshot snapshot) {
                         if (snapshot.child(groupName).exists()){
                             Toast.makeText(getApplicationContext(),"Group name is already taken. Please choose another",Toast.LENGTH_SHORT).show();
+                            b.setEnabled(true);
                         }
                         else {
                             firebase.child("BetGroups").child("GroupsNames").child(groupName).setValue(password);
@@ -117,6 +118,7 @@ public class UsersGroups extends AppCompatActivity {
                     public void onDataChange(DataSnapshot snapshot) {
                         if (!snapshot.child(groupName).exists()){
                             Toast.makeText(getApplicationContext(),"Group name does not exist",Toast.LENGTH_SHORT).show();
+                            b.setEnabled(true);
                         }
                         else {
                             if (snapshot.child(groupName).getValue().equals(password)){

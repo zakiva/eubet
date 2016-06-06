@@ -23,6 +23,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class GroupInfo extends AppCompatActivity {
@@ -146,12 +147,15 @@ public class GroupInfo extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 password = (String) snapshot.child("BetGroups").child("GroupsNames").child(groupName).getValue();
                 String url = (String) snapshot.child("download").getValue();
-                String content = "Play Eubet! Group name: " + groupName + ". The password is " + password +". Download app from: " + url;
+                String content = "You were invited to join a BetGroup in Eubet! Group name: " + groupName + ". The password is " + password +".";
+                String content2 = "Download app from: " + url;
                 //Log.d("aaaaa:", content);
                 //Log.d("sms:", content);
                 try {
+
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(number, null, content, null, null);
+                    smsManager.sendTextMessage(number, null, content2, null, null);
                     Toast.makeText(getApplicationContext(), "Invitation sent", Toast.LENGTH_SHORT).show();
                     ((EditText) findViewById(R.id.editText)).setText("");
                     b.setEnabled(true);
