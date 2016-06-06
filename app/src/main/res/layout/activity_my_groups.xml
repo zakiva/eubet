@@ -24,12 +24,26 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create/Join group"
-        android:id="@+id/buttonJoinOrCreateGroup"
-        android:layout_below="@+id/myGroupList"
+        android:text="Join Group"
+        android:id="@+id/buttonJoinGroup"
+        android:layout_below="@+id/groupsHeadline"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:onClick="buttonJoinOrCreateGroupClicked" />
+        android:layout_alignParentLeft="true"
+        android:textAllCaps="false"
+        android:onClick="buttonJoinGroupClicked" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Group"
+        android:id="@+id/buttonCreateGroup"
+        android:layout_below="@+id/groupsHeadline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentRight="true"
+        android:textAllCaps="false"
+        android:onClick="buttonCreateGroupClicked" />
 
     <ListView
         android:id="@+id/myGroupList"
@@ -37,7 +51,7 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/groupsHeadline"
+        android:layout_below="@+id/buttonCreateGroup"
         android:layout_marginTop="15dp"
         android:transcriptMode="alwaysScroll" />
 

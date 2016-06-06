@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.zakiva.euro"
-        minSdkVersion 14
-        targetSdkVersion 23
+        minSdkVersion 15
+        targetSdkVersion 20
         versionCode 1
         versionName "1.0"
     }

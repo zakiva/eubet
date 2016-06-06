@@ -39,8 +39,15 @@ public class MyGroups extends AppCompatActivity {
         });
     }
 
-    public void buttonJoinOrCreateGroupClicked (View view){
+    public void buttonJoinGroupClicked (View view){
         Intent ug = new Intent(MyGroups.this, UsersGroups.class);
+        ug.putExtra("createOrJoinFlag", "join");
+        startActivity(ug);
+    }
+
+    public void buttonCreateGroupClicked (View view){
+        Intent ug = new Intent(MyGroups.this, UsersGroups.class);
+        ug.putExtra("createOrJoinFlag", "create");
         startActivity(ug);
     }
 }
