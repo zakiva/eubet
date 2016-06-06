@@ -18,5 +18,19 @@
             android:layout_alignParentTop="true"
             android:transcriptMode="alwaysScroll" />
 
+    <Button
+        android:layout_height="wrap_content"
+        android:text="Create Games"
+        android:layout_width="wrap_content"
+        android:textSize="15dp"
+        android:background="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:textAllCaps="false"
+        android:onClick="buttonCreateGamesClicked"
+        android:id="@+id/buttonCreateGames"
+        android:layout_below="@+id/buttonStartBet"
+        android:layout_centerHorizontal="true"
+        />
+
 
 </RelativeLayout>

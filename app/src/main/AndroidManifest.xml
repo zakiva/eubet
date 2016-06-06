@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Bets" />
+        <activity android:name=".Bets"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".WinningTeam" />
         <activity android:name=".GamesList" />
         <activity android:name=".UsersGroups" />

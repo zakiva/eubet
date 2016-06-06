@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         if (!curUsername.equals("NULL")){
             ((TextView) findViewById(R.id.textView)).setText("Hello " + curUsername);
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
-            b.setText("Start bet");
+           // b.setText("Start Bet!");
             isUserExist = 1;
-        } else {
-            b.setText("Login");
+            ((Euro) this.getApplication()).setGlobalUsername(curUsername);
+            Intent bets = new Intent(MainActivity.this, Bets.class);
+            startActivity(bets);
         }
-        ((Euro) this.getApplication()).setGlobalUsername(curUsername);
 
     }
     @Override
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
             b.setText("Start bet");
             isUserExist = 1;
-        } else {
-            b.setText("Login");
+            Intent bets = new Intent(MainActivity.this, Bets.class);
+            startActivity(bets);
         }
     }
 
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
             ((EditText) findViewById(R.id.editText)).setVisibility(View.INVISIBLE);
             b.setText("Start bet");
             isUserExist = 1;
-        } else {
-            b.setText("Login");
+            Intent bets = new Intent(MainActivity.this, Bets.class);
+            startActivity(bets);
         }
     }
 
@@ -120,32 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void buttonCreateGamesClicked (View view) {
-
-        Game game1 = new Game(1, "Northern Ireland", 2, "Northern Ireland", 5, 8, "May 30, 21:00", "Group A");
-        Game game2 = new Game(2, "Ramama", 1, "TLV", 3, 3, "May 20, 13:00", "Group B");
-        Game game3 = new Game(3, "Eilat", 7, "NY", 1, 4, "May 10, 11:00", "Group C");
-        Game game4 = new Game(4, "Israel", 5, "USA", 5, 9, "May 23, 21:00", "Group D");
-
-        game1.bets.put("demoUserName", -1);
-        game2.bets.put("demoUserName", -1);
-        game3.bets.put("demoUserName", -1);
-        game4.bets.put("demoUserName", -1);
 
 
-        firebase.child("games").push().setValue(game1);
-        firebase.child("games").push().setValue(game2);
-        firebase.child("games").push().setValue(game3);
-        firebase.child("games").push().setValue(game4);
-    }
-
-    public void buttonBetGroupsClicked (View view) {
-        if (curUsername.equals("NULL")){
-            Toast.makeText(getApplicationContext(),"Please login",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Intent ug = new Intent(MainActivity.this, MyGroups.class);
-        startActivity(ug);
-    }
 
 }

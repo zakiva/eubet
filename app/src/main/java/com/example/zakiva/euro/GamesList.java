@@ -2,6 +2,8 @@ package com.example.zakiva.euro;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -27,6 +29,10 @@ public class GamesList extends AppCompatActivity {
         setContentView(R.layout.activity_games_list);
 
         userName = ((Euro) this.getApplication()).getGlobalUsername();
+
+        if (!(userName.equals("zahi"))){
+            ((Button) findViewById(R.id.buttonCreateGames)).setVisibility(View.GONE);
+        }
 
         Firebase.setAndroidContext(this);
         firebase = new Firebase(getString(R.string.firebase));
@@ -95,7 +101,7 @@ public class GamesList extends AppCompatActivity {
                         int a = Integer.parseInt(sa[10]);
                         int b = Integer.parseInt(sb[10]);
 
-                        return a-b;
+                        return a - b;
 
                     }
                 }
@@ -104,5 +110,24 @@ public class GamesList extends AppCompatActivity {
         ListAdapter listAdapter = new GamesListAdapter(getBaseContext(), items);
         ListView listView = (ListView) findViewById(R.id.gamesList);
         listView.setAdapter(listAdapter);
+    }
+
+    public void buttonCreateGamesClicked (View view) {
+
+        Game game1 = new Game(1, "Northern Ireland", 2, "Northern Ireland", 5, 8, "May 30, 21:00", "Group A");
+        Game game2 = new Game(2, "Ramama", 1, "TLV", 3, 3, "May 20, 13:00", "Group B");
+        Game game3 = new Game(3, "Eilat", 7, "NY", 1, 4, "May 10, 11:00", "Group C");
+        Game game4 = new Game(4, "Israel", 5, "USA", 5, 9, "May 23, 21:00", "Group D");
+
+        game1.bets.put("demoUserName", -1);
+        game2.bets.put("demoUserName", -1);
+        game3.bets.put("demoUserName", -1);
+        game4.bets.put("demoUserName", -1);
+
+
+        firebase.child("games").push().setValue(game1);
+        firebase.child("games").push().setValue(game2);
+        firebase.child("games").push().setValue(game3);
+        firebase.child("games").push().setValue(game4);
     }
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class Bets extends AppCompatActivity {
 
@@ -29,5 +30,10 @@ public class Bets extends AppCompatActivity {
     public void buttonScorersClicked(View view) {
         Intent scorer = new Intent(Bets.this, Scorer.class);
         startActivity(scorer);
+    }
+
+    public void buttonBetGroupsClicked (View view) {
+        Intent ug = new Intent(Bets.this, MyGroups.class);
+        startActivity(ug);
     }
 }
