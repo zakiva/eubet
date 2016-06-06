@@ -40,10 +40,11 @@
         android:imeOptions ="actionDone"
         android:singleLine="true"
         android:inputType="number"
+        android:ems="9"
+        android:textSize="14dp"
         android:id="@+id/editText"
-        android:ems="7"
         android:layout_below="@+id/textView2"
-        android:hint="Type or click:"
+        android:hint="Type number or click:"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp" />
