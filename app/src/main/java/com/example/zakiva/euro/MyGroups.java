@@ -34,7 +34,7 @@ public class MyGroups extends AppCompatActivity {
             @Override
             public void onChanged() {
                 super.onChanged();
-                listView.setSelection(mGroupListAdapter.getCount() - 1);
+                listView.setSelection(0);
             }
         });
     }

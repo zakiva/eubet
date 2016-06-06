@@ -43,11 +43,11 @@ public class GroupListAdapter extends FirebaseListAdapter<GroupName> {
      * @param groupname An instance representing the current state of a chat message
      */
     @Override
-    protected void populateView(View view, GroupName groupname) {
+    protected void populateView(View view, GroupName groupname, int index) {
         final String groupName = groupname.getName();
         Button groupNameButton = (Button) view.findViewById(R.id.groupNameList);
         groupNameButton.setText(groupName);
-        if (i == 0) {
+        if (index % 2 == 0) {
             groupNameButton.setBackgroundColor(Color.parseColor("#d0dddc"));
             i = 1;
         } else {

@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Invite Friend:"
+        android:text="Invite Friend"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -36,13 +36,13 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:imeOptions ="actionNext"
+        android:imeOptions ="actionDone"
         android:singleLine="true"
         android:inputType="number"
         android:id="@+id/editText"
-        android:minWidth="190dp"
+        android:minWidth="100dp"
         android:layout_below="@+id/textView2"
-        android:hint="Friend's phone number"
+        android:hint="Type number or click:"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp" />
@@ -51,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Invite"
+
         android:id="@+id/buttonInvite"
         android:layout_below="@+id/textView2"
         android:layout_alignParentRight="true"
@@ -74,6 +75,7 @@
         android:id="@+id/memberList"
         android:layout_width="fill_parent"
         android:divider="@null"
+        android:stackFromBottom="false"
         android:dividerHeight="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
@@ -81,15 +83,16 @@
         android:transcriptMode="alwaysScroll" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/textView2"
+        android:layout_marginTop="-10dp"
         android:background="@drawable/contact"
         android:layout_toLeftOf="@id/buttonInvite"
         android:id="@+id/buttonC"
         android:textAllCaps="false"
         android:textSize="20dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="7dp"
         android:onClick="buttonCClicked" />
 
 </RelativeLayout>

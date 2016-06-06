@@ -123,7 +123,7 @@ public class GroupInfo extends AppCompatActivity {
             @Override
             public void onChanged() {
                 super.onChanged();
-                listView.setSelection(mGroupMemberListAdapter.getCount() - 1);
+                listView.setSelection(0);
             }
         });
     }

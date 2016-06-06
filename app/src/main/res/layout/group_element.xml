@@ -15,10 +15,10 @@
             android:id="@+id/groupNameList"
             android:text="Group Name"
             android:textSize="20dp"
+            android:fontFamily="sans-serif"
             android:onClick="groupNameListClicked"
             android:background="#d0dddc"
             android:layout_width="fill_parent"
-            android:fontFamily="sans-serif"
             android:textAllCaps="false"
             android:layout_height="wrap_content" />
 

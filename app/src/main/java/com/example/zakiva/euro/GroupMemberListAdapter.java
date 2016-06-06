@@ -38,7 +38,7 @@ public class GroupMemberListAdapter extends FirebaseListAdapter<GroupMember> {
      * @param groupmember An instance representing the current state of a chat message
      */
     @Override
-    protected void populateView(View view, GroupMember groupmember) {
+    protected void populateView(View view, GroupMember groupmember, int index) {
 
 
         final String username = groupmember.getUsername();
@@ -47,9 +47,23 @@ public class GroupMemberListAdapter extends FirebaseListAdapter<GroupMember> {
         final int score = groupmember.getScore();
         TextView textScore = (TextView) view.findViewById(R.id.score);
         textScore.setText(Integer.toString(score));
+        TextView number = (TextView) view.findViewById(R.id.number);
+        index++; // starts from 1 instead of 0
+        number.setText(index + ") ");
+        if (index == 1) {
+            textUsername.setTextColor(Color.parseColor("#FFFE3D3D"));
+            number.setTextColor(Color.parseColor("#FFFE3D3D"));
+            textScore.setTextColor(Color.parseColor("#FFFE3D3D"));
+        }
+        else {
+            textUsername.setTextColor(Color.parseColor("#ff000000"));
+            number.setTextColor(Color.parseColor("#ff000000"));
+            textScore.setTextColor(Color.parseColor("#ff000000"));
+        }
+
 
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.memberElement);
-        if (i == 0) {
+        if (index %2 == 0) {
             relativeLayout.setBackgroundColor(Color.parseColor("#d0dddc"));
             i = 1;
         } else {
