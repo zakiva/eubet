@@ -1,7 +1,11 @@
 package com.example.zakiva.euro;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -26,6 +30,56 @@ public class GroupInfo extends AppCompatActivity {
     String groupName;
     String password;
     String number;
+
+
+
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        switch (reqCode) {
+            case (1) :
+                String name = "";
+                String name2 = "";
+                String phone = "";
+
+                if (resultCode == Activity.RESULT_OK) {
+
+                    Uri contactData = data.getData();
+                    Cursor c =  getContentResolver().query(contactData, null, null, null, null);
+                    if (c.moveToFirst()) {
+                        int column = c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                        name = c.getString(column);
+                    }
+                    Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
+                    while (phones.moveToNext())
+                    {
+                        name2 = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                        phone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        if (name.equals(name2)){
+                            ((EditText) findViewById(R.id.editText)).setText(phone);
+                        }
+                    }
+
+                    /*
+                    firebase.child("Test").push().setValue(9);
+                    Uri contactData = data.getData();
+                    Cursor c =  getContentResolver().query(contactData, null, null, null, null);
+                    firebase.child("Test").push().setValue(10);
+                    if (c.moveToFirst()) {
+                        int column = c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                        firebase.child("Test").push().setValue(column);
+                        String name = c.getString(column);
+                        firebase.child("Test").push().setValue(11);
+                        firebase.child("Test").push().setValue(name);
+
+                    }
+                    */
+                }
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +127,13 @@ public class GroupInfo extends AppCompatActivity {
             }
         });
     }
+
+    public void buttonCClicked(View view) {
+        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        startActivityForResult(intent, 1);
+    }
+
+
 
     public void buttonInviteClicked (View view) {
         number = ((EditText) findViewById(R.id.editText)).getText().toString();

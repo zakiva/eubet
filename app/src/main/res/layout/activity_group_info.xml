@@ -50,7 +50,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Invite friend"
+        android:text="Invite"
         android:id="@+id/buttonInvite"
         android:layout_below="@+id/textView2"
         android:layout_alignParentRight="true"
@@ -79,5 +79,17 @@
         android:layout_below="@+id/textView3"
         android:layout_marginTop="15dp"
         android:transcriptMode="alwaysScroll" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:background="@drawable/contact"
+        android:layout_toLeftOf="@id/buttonInvite"
+        android:id="@+id/buttonC"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:layout_marginRight="15dp"
+        android:onClick="buttonCClicked" />
 
 </RelativeLayout>
