@@ -58,8 +58,8 @@ public class WinningTeamAdapter extends ArrayAdapter<String[]> {
         final String[] item = getItem(i);
         name.setText(" " + item[0]  + " " + item[1]);
         if (i % 2 == 0){
-            relativeLayout.setBackgroundColor(Color.parseColor("#fbf5f6bb"));
-            name.setBackgroundColor(Color.parseColor("#fbf5f6bb"));
+            relativeLayout.setBackgroundColor(Color.parseColor("#FF4D9755"));
+            name.setBackgroundColor(Color.parseColor("#FF4D9755"));
         }
         else {
             relativeLayout.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
