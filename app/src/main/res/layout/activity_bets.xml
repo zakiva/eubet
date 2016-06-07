@@ -6,7 +6,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.zakiva.euro.Bets"
-    android:background="#aefec33e">
+    android:background="#000000">
 
 
     <RelativeLayout
@@ -180,6 +180,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Bets"
         android:textSize="30dp"
+        android:textColor="#ffffff"
         android:layout_marginTop="40dp"
         android:id="@+id/betsLabel"
         android:layout_below="@+id/groups_frame"

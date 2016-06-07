@@ -48,7 +48,7 @@ public class GroupListAdapter extends FirebaseListAdapter<GroupName> {
         Button groupNameButton = (Button) view.findViewById(R.id.groupNameList);
         groupNameButton.setText(groupName);
         if (index % 2 == 0) {
-            groupNameButton.setBackgroundColor(Color.parseColor("#d0dddc"));
+            groupNameButton.setBackgroundColor(Color.parseColor("#fbf5f6bb"));
             i = 1;
         } else {
             groupNameButton.setBackgroundColor(Color.parseColor("#FFFFFFFF"));

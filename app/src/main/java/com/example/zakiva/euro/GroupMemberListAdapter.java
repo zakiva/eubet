@@ -64,7 +64,7 @@ public class GroupMemberListAdapter extends FirebaseListAdapter<GroupMember> {
 
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.memberElement);
         if (index %2 == 0) {
-            relativeLayout.setBackgroundColor(Color.parseColor("#d0dddc"));
+            relativeLayout.setBackgroundColor(Color.parseColor("#fbf5f6bb"));
             i = 1;
         } else {
             relativeLayout.setBackgroundColor(Color.parseColor("#FFFFFFFF"));

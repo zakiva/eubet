@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#aefec33e"
+    android:background="#000000"
     tools:context="com.example.zakiva.euro.GroupInfo">
 
     <TextView
@@ -19,15 +19,17 @@
         android:textSize="30dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Group Name"
+        android:textColor="#ffffff"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:textColor="#000000" />
+         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Invite Friend"
+        android:textColor="#ffffff"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -40,7 +42,10 @@
         android:imeOptions ="actionDone"
         android:singleLine="true"
         android:inputType="number"
+        android:padding="6dp"
         android:ems="9"
+        android:textColor="#ffffff"
+        android:background="#ffffff"
         android:textSize="16dp"
         android:id="@+id/editText"
         android:layout_below="@+id/textView2"
@@ -68,6 +73,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Group members:"
         android:id="@+id/textView3"
+        android:textColor="#ffffff"
         android:layout_below="@+id/editText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

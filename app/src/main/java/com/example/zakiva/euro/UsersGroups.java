@@ -117,7 +117,7 @@ public class UsersGroups extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         if (!snapshot.child(groupName).exists()){
-                            Toast.makeText(getApplicationContext(),"Group name does not exist",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Group does not exist",Toast.LENGTH_SHORT).show();
                             b.setEnabled(true);
                         }
                         else {
