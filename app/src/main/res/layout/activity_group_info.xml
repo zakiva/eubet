@@ -55,10 +55,9 @@
         android:layout_marginTop="5dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Invite"
-
         android:id="@+id/buttonInvite"
         android:layout_below="@+id/textView2"
         android:layout_alignParentRight="true"
@@ -92,11 +91,12 @@
 
     <Button
         android:layout_width="80dp"
+        android:layout_toRightOf="@+id/editText"
         android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
         android:layout_below="@+id/textView2"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="-15dp"
         android:background="@drawable/contact"
-        android:layout_toLeftOf="@id/buttonInvite"
         android:id="@+id/buttonC"
         android:textAllCaps="false"
         android:textSize="20dp"
