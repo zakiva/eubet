@@ -44,7 +44,6 @@
         android:inputType="number"
         android:padding="6dp"
         android:ems="9"
-        android:textColor="#ffffff"
         android:background="#ffffff"
         android:textSize="16dp"
         android:id="@+id/editText"
@@ -55,7 +54,7 @@
         android:layout_marginTop="5dp" />
 
     <Button
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:text="Invite"
         android:id="@+id/buttonInvite"
