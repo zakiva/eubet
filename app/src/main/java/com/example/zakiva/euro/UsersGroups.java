@@ -113,15 +113,19 @@ public class UsersGroups extends AppCompatActivity {
                 b.setEnabled(true);
             }
             else {
-                firebase.child("BetGroups").child("GroupsNames").addListenerForSingleValueEvent(new ValueEventListener() {
+                firebase.child("BetGroups").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        if (!snapshot.child(groupName).exists()){
+                        if (!snapshot.child("GroupsNames").child(groupName).exists()){
                             Toast.makeText(getApplicationContext(),"Group does not exist",Toast.LENGTH_SHORT).show();
                             b.setEnabled(true);
                         }
                         else {
-                            if (snapshot.child(groupName).getValue().equals(password)){
+                            if (snapshot.child("GroupsToUsername").child(groupName).child(userName).exists()){
+                                Toast.makeText(getApplicationContext(),"You are already a member of this group",Toast.LENGTH_SHORT).show();
+                                b.setEnabled(true);
+                            }
+                            else if (snapshot.child("GroupsNames").child(groupName).getValue().equals(password)) {
                                 firebase.child("BetGroups").child("GroupsToUsername").child(groupName).child(userName).setValue(true);
                                 firebase.child("BetGroups").child("UsernameToGroups").child(userName).child(groupName).setValue(true);
                                 GroupMember groupmember = new GroupMember(userName, 0, 0);
@@ -129,13 +133,13 @@ public class UsersGroups extends AppCompatActivity {
                                 GroupName groupname = new GroupName(groupName);
                                 firebase.child("BetGroups").child("UsernameToGroupsObjects").child(userName).push().setValue(groupname);
                                 Toast.makeText(getApplicationContext(),"You have joined the group!",Toast.LENGTH_SHORT).show();
-
                                 Intent gi = new Intent(UsersGroups.this, GroupInfo.class);
                                 gi.putExtra("groupName", groupName);
                                 startActivity(gi);
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"Wrong password",Toast.LENGTH_SHORT).show();
+                                b.setEnabled(true);
                             }
                         }
                     }
