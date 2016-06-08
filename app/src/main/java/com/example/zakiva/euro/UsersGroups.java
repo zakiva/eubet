@@ -22,6 +22,14 @@ public class UsersGroups extends AppCompatActivity {
     String createOrJoinFlag = "";
     Button b;
 
+    public boolean isAlphaNumeric(String s){
+        String pattern= "^[a-zA-Z0-9]*$";
+        if(s.matches(pattern)){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -72,6 +80,10 @@ public class UsersGroups extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Pleae enter password",Toast.LENGTH_SHORT).show();
                 b.setEnabled(true);
             }
+            else if (!isAlphaNumeric(groupName)){
+                Toast.makeText(getApplicationContext(),"Please use only alphanumeric characters",Toast.LENGTH_SHORT).show();
+                b.setEnabled(true);
+            }
             else {
                 firebase.child("BetGroups").child("GroupsNames").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -110,6 +122,10 @@ public class UsersGroups extends AppCompatActivity {
             }
             else if (password.equals("")){
                 Toast.makeText(getApplicationContext(),"Pleae enter password",Toast.LENGTH_SHORT).show();
+                b.setEnabled(true);
+            }
+            else if (!isAlphaNumeric(groupName)){
+                Toast.makeText(getApplicationContext(),"Group does not exist",Toast.LENGTH_SHORT).show();
                 b.setEnabled(true);
             }
             else {

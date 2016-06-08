@@ -25,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
     String curUsername = "NULL";
     Button b;
 
+    public boolean isAlphaNumeric(String s){
+        String pattern= "^[a-zA-Z0-9]*$";
+        if(s.matches(pattern)){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,15 +108,14 @@ public class MainActivity extends AppCompatActivity {
     public void buttonStartBetClicked(View view) {
         b.setEnabled(false);
 
-        if (isUserExist == 1){
-            Intent bets = new Intent(MainActivity.this, Bets.class);
-            startActivity(bets);
-            return;
-        }
         ((Euro) this.getApplication()).setGlobalUsername(curUsername);
         final String userName = ((EditText) findViewById(R.id.editText)).getText().toString();
         if (userName.equals("")){
             Toast.makeText(getApplicationContext(),"Please enter your user name",Toast.LENGTH_SHORT).show();
+            b.setEnabled(true);
+        }
+        else if (!isAlphaNumeric(userName)){
+            Toast.makeText(getApplicationContext(),"Please use only alphanumeric characters",Toast.LENGTH_SHORT).show();
             b.setEnabled(true);
         }
         else {
