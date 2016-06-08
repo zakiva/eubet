@@ -60,7 +60,7 @@ public class GroupInfo extends AppCompatActivity {
                     {
                         name2 = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                         phone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        if (name.equals(name2)){
+                        if (name.equals(name2) && phone.length() > 9){
                             ((EditText) findViewById(R.id.editText)).setText(phone);
                         }
                     }
