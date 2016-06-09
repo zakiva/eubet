@@ -23,7 +23,7 @@ public class UsersGroups extends AppCompatActivity {
     Button b;
 
     public boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
+        String pattern= "^[a-zA-Z0-9 ]*$";
         if(s.matches(pattern)){
             return true;
         }
