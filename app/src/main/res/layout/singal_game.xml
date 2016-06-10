@@ -84,6 +84,33 @@
             android:id="@+id/teams"
             android:textColor="#b2233ff2" />
 
+
+        <Button
+            android:id="@+id/close_game"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/buttonSecondTeam"
+            android:background="#c8193f"
+            android:gravity="center|left"
+            android:text="Close game"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/open_game"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/close_game"
+            android:background="#d3b6e50d"
+            android:gravity="center|left"
+            android:text="Open game"
+            android:textSize="16dp" />
+
     </RelativeLayout>
 
 

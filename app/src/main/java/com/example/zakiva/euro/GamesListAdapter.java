@@ -60,7 +60,18 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         TextView time = (TextView) customView.findViewById(R.id.time);
         TextView teams = (TextView) customView.findViewById(R.id.teams);
 
+        Button openGame = (Button) customView.findViewById(R.id.open_game);
+        Button closeGame = (Button) customView.findViewById(R.id.close_game);
 
+      //  if ((!(userName.equals("zahi"))) && (!(userName.equals("Ariel"))) && (!(userName.equals("roy")))) {
+        if (userName.equals("zahi ") || userName.equals("roy") || userName.equals("Ariel")) {
+            openGame.setVisibility(View.VISIBLE);
+            closeGame.setVisibility(View.VISIBLE);
+        }
+        else {
+            openGame.setVisibility(View.GONE);
+            closeGame.setVisibility(View.GONE);
+        }
 
         System.out.println("settext");
 
@@ -80,6 +91,19 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
         colorCells(i, viewGroup, bet, currentView, result);
 
         System.out.println("setlisteners");
+
+
+        openGame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                controlGame(item[5], 1);
+            }
+        });
+
+        closeGame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                controlGame(item[5], 0);
+            }
+        });
 
         team1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -132,6 +156,11 @@ public class GamesListAdapter extends ArrayAdapter<String[]> {
 
 
         return customView;
+    }
+
+    public void controlGame (final String key, final int status) {
+        final Firebase firebase = new Firebase(mContext.getApplicationContext().getString(R.string.firebase));
+        firebase.child("games").child(key).child("edit").setValue(status);
     }
 
 
